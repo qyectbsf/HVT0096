@@ -1,5 +1,24 @@
 include <../global_vars.scad>
 
+module singular_belt_module()
+{
+  for (x = [-29, 29])
+  {
+    y_offset = 15 + 6 - 8.5;
+    difference()
+    {
+      translate([x,y_offset,0]) cylinder(h = belts_max_space, d = 19.9, $fn = resolution);
+      translate([x,y_offset,0]) pulley_cutout(20);
+    }
+
+    hull()
+    {
+      translate([x,y_offset,belts_max_space / 2 - 0.175]) cylinder(h = 10.8 + 0.35 , d = 19.9, $fn = resolution);
+      translate([x - 5, -15,belts_max_space / 2 - 0.175]) cube([10,1,10.8 + 0.35]);
+    }
+  }
+}
+
 module belt_tentioner_base()
 {
   difference()
@@ -19,73 +38,54 @@ module belt_tentioner_base()
 
       // z cube
       // 8.4 = belt width + idler space / 2 + idler mount (6 + 1.4 + 1)
-      for (z = [lower_belt_z - 8.4, upper_belt_z + 8.4])
+      for (z = [lower_belt_z - 10.4, upper_belt_z + 10.4])
       {
-        translate([0.0, 3.0, z + 3.0 + 1.4]) cube([90.0 * 2.0, 36.0, 6.0], center = true);
+        translate([0.0, 3.0, z + 3.0 + 1.4]) cube([90.0 * 2.0, 36.0, 10], center = true);
       }
       for (x = [90.0 - 6.0, -30.0 - 90.0])
       {
         translate([x, -15.0, 0.0]) cube([36.0, 36.0, 6.0]);
       }
 
+      for (i = [0,180])
+      {
+        translate([0,0, lower_belt_z - 1 + belts_max_space / 2])
+          rotate([0,i,0])
+          translate([43.5,0,- belts_max_space / 2])
+          singular_belt_module();
+      }
 
-      /* i = -10; */
-      /* for (x = [i,i - 22.5,i - (22.5 * 2)]) */
-      /* { */
-      /*   y = 15 + 6 - 8.5; */
-      /*   if (x != - 32.5) */
-      /*   { */
-      /*     difference() */
-      /*     { */
-      /*       translate([x,y,lower_belt_z]) cylinder(h = 10.8 * 2 + 0.35, d =19.4, $fn = resolution); */
-      /*       translate([x,y,lower_belt_z]) pulley_cutout(19.5); */
-      /*     } */
-      /*     hull() */
-      /*     { */
-      /*       translate([x,y,upper_belt_z - 0.35]) cylinder(h = 10.8 + 0.35, d =19.4, $fn = resolution); */
-      /*       translate([x -  5,-15,upper_belt_z]) cube([10,1,10.8]); */
-      /*     } */
-      /*   } */
-      /*   if (x != - 32.5) */
-      /*   { */
-      /*     difference() */
-      /*     { */
-      /*       translate([-x,y,lower_belt_z]) cylinder(h = 10.8 * 2 + 0.35, d =19.4, $fn = resolution); */
-      /*       translate([-x,y,upper_belt_z]) pulley_cutout(19.5); */
-      /*     } */
-      /*     hull() */
-      /*     { */
-      /*       translate([-x,y,lower_belt_z]) cylinder(h = 10.8 + 0.35, d =19.4, $fn = resolution); */
-      /*       translate([-x -  5,-15,lower_belt_z]) cube([10,1,10.8]); */
-      /*     } */
-      /*   } */
-      /* } */
     }
-    //   translate([0,16 + 5 +0.1,33.025]) cube([(85 + 6) * 2 + 0.2, 8, 10.8 * 2 + 0.35], center = true);
-    /* i = -10; */
-    /* for (x = [i,i - 22.5,i - (22.5 * 2)]) */
-    /* { */
-    /*   y = 15 + 6 - 8.5; */
-    /*   translate([x,y,0]) cylinder(h = 60, d =3mm_stab, $fn = resolution); */
-    /*   translate([-x,y,0]) cylinder(h = 60, d =3mm_stab, $fn = resolution); */
-    /* } */
+
+    // space for belts
+    translate([-90.1, 15 + 2, lower_belt_z - 1]) cube([180.2, 8, belts_max_space]);
+
+    // space for 3mm stab
+    for (x = [14.5, 43.5, 72.5])
+    {
+      y = 15 + 6 - 8.5;
+      translate([x,y,0]) cylinder(h = 60, d =3mm_stab, $fn = resolution);
+      translate([-x,y,0]) cylinder(h = 60, d =3mm_stab, $fn = resolution);
+    }
+
     // m6 holfe for frame conectivity
-    /* for (x = [-1,1]) */
-    /* { */
-    /*   translate([x * (70 + 6 + 15),0,0]) cylinder(h = 6.2, d =m6_screw, $fn = resolution); */
-    /* } */
+    for (x = [-1,1])
+    {
+      translate([x * 105,0,0]) cylinder(h = 6.2, d =m6_screw, $fn = resolution);
+    }
+
     // cutout for tention m4 screw
-    /* for (i =[-32.5,32.5]) */
-    /* { */
-    /*   for (x = [-6,6]) */
-    /*   { */
-    /*     for (z = [lower_belt_z - 3, upper_belt_z + 10.8 + 3]) */
-    /*     { */
-    /*       translate([i + x,-15 -0.1,z]) rotate([-90,0,0]) cylinder(h = 36.2, d = m4_screw,$fn = resolution); */
-    /*       translate([i + x,+18 -0.1,z]) rotate([-90,0,0]) cylinder(h = 3.2, d = m4_nut,$fn = 6); */
-    /*     } */
-    /*   } */
-    /* } */
+    for (i =[-43.5, 43.5])
+    {
+      for (x = [-6,6])
+      {
+        for (z = [lower_belt_z - 8.4, upper_belt_z + 8.4])
+        {
+          translate([i + x,-15 -0.1,z + 3.0 + 1.4]) rotate([-90,0,0]) cylinder(h = 36.2, d = m4_screw,$fn = resolution);
+          translate([i + x,+18 -0.1,z + 3.0 + 1.4]) rotate([-90,0,0]) cylinder(h = 3.2, d = m4_nut,$fn = 6);
+        }
+      }
+    }
   }
 }
 
@@ -124,20 +124,11 @@ module belt_tentioner_mount()
     {
       belt_tentioner_base();
       // space for belt_tention_arm
-      /* for (i = [(32.5 - 22.5 / 2 - 0.1) - 0.1,-(32.5 - 22.5 / 2 - 0.1) -22.8]) */
-      /* { */
-      /*   translate([i,-26 / 2 -0.1,lower_belt_z - 6 - 0.1]) */
-      /*   cube([22.5 + 0.4,36, 10.8 * 2 + 0.35 + 12 + 0.2]); */
-      /* } */
+      for (i = [-43.5,43.5])
+      {
+        translate([i - 12.5,-12.0,lower_belt_z - 6 - 2.0]) cube([25,36, belts_max_space + 12 + 2]);
+      }
     }
-    // no need ofr this like this
-    /* for (x = [32.5, -32.5]) */
-    /* { */
-    /*   for (z = [lower_belt_z - 3,upper_belt_z +10.8 + 3]) */
-    /*   { */
-    /*     translate([x,15 + 6 + 3 - 1,z]) cube([40,4,6], center = true); */
-    /*   } */
-    /* } */
   }
 }
 
@@ -148,4 +139,6 @@ module belt_tentioner()
   belt_tentioner_mount();
 }
 
-belt_tentioner();
+//singular_belt_module();
+
+//belt_tentioner();
