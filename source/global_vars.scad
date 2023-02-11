@@ -18,11 +18,11 @@ pulley_cutout_height = 10.8;
 module pulley_cutout(width)
 {
   difference()
-    {
-      translate([0.0, 0.0, pulley_cutout_height/2])
-        cylinder(h = pulley_cutout_height, d = width, center = true, $fn = resolution);
-      pulley_cutout_inverse(width);
-    }
+  {
+    translate([0.0, 0.0, pulley_cutout_height/2])
+      cylinder(h = pulley_cutout_height, d = width, center = true, $fn = resolution);
+    pulley_cutout_inverse(width);
+  }
 }
 
 module pulley_cutout_inverse(width)
@@ -32,25 +32,25 @@ module pulley_cutout_inverse(width)
   bearing_mount_height = 1.0;
 
   difference()
+  {
+    union()
     {
-      union()
-      {
-        translate([0.0, 0.0, pulley_cutout_height/2 + 4.9])
-          cylinder(h = bearing_mount_height,
-                   d1 = bearing_mount_inner_width,
-                   d2 = bearing_mount_outer_width,
-                   center = true,
-                   $fn = resolution);
-        translate([0.0, 0.0, pulley_cutout_height/2 - 4.9])
-          cylinder(h = bearing_mount_height,
-                   d1 = bearing_mount_outer_width,
-                   d2 = bearing_mount_inner_width,
-                   center = true,
-                   $fn = resolution);
-      }
-      translate([0.0, 0.0, pulley_cutout_height/2])
-        cylinder(h = pulley_cutout_height, d = 3mm_stab, center = true, $fn = resolution);
+      translate([0.0, 0.0, pulley_cutout_height/2 + 4.9])
+        cylinder(h = bearing_mount_height,
+                 d1 = bearing_mount_inner_width,
+                 d2 = bearing_mount_outer_width,
+                 center = true,
+                 $fn = resolution);
+      translate([0.0, 0.0, pulley_cutout_height/2 - 4.9])
+        cylinder(h = bearing_mount_height,
+                 d1 = bearing_mount_outer_width,
+                 d2 = bearing_mount_inner_width,
+                 center = true,
+                 $fn = resolution);
     }
+    translate([0.0, 0.0, pulley_cutout_height/2])
+      cylinder(h = pulley_cutout_height, d = 3mm_stab, center = true, $fn = resolution);
+  }
 }
 
 //pulley_cutout(20);
