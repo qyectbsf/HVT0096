@@ -27,7 +27,9 @@ module pulley_mount_front_left()
       translate([13.5 - 1.7, 27.4 - 3.0, 27.0]) cube([9.0, 5.0, 13.0], center = true);
 
       // m3 hole to mount optical sensor into
-      translate([4.0, 27.38 - 3.0, 36.7]) rotate([0.0, 90.0, 0.0]) cylinder(h = 15.0, d = 2.9, center = true, $fn = resolution);
+      translate([4.0, 27.38 - 3.0, 36.7])
+        rotate([0.0, 90.0, 0.0])
+        cylinder(h = 15.0, d = 2.9, center = true, $fn = resolution);
 
       // space for connector of optical sensor
       translate([0.0, 27.4 - 3.0, 9.45]) cube([6.2, 12.0, 7.7], center = true);
@@ -39,12 +41,18 @@ module pulley_mount_front_left()
       translate([0.0,(65.0 / 8.0), 26.0]) cylinder(h = 50.0, d = 3mm_stab, $fn = resolution, center = true);
 
       // m6 mount hole for frame connectivity
-      translate([3.0 + 15.0, 0.5, 20.0]) rotate([90.0, 0.0, 0.0]) cylinder(h = 6.2, d = m6_screw, center = true, $fn = resolution);
+      translate([3.0 + 15.0, 0.5, 20.0])
+        rotate([90.0, 0.0, 0.0])
+        cylinder(h = 6.2, d = m6_screw, center = true, $fn = resolution);
       for (i = [-35.0, 0.0, 35.0])
         {
-          translate([0.0, (-65.0 / 2.0) + 15.0, i]) rotate([0.0, 90.0, 0.0]) cylinder(h = 6.2, d = m6_screw, center = true, $fn = resolution);
+          translate([0.0, (-65.0 / 2.0) + 15.0, i])
+            rotate([0.0, 90.0, 0.0])
+            cylinder(h = 6.2, d = m6_screw, center = true, $fn = resolution);
         }
-      translate([0.0 ,(65.0 / 2) - 15.0, -35.0]) rotate([0.0 ,90.0 ,0.0]) cylinder(h = 6.2, d = m6_screw, center = true, $fn = resolution);
+      translate([0.0, (65.0 / 2) - 15.0, -35.0])
+        rotate([0.0, 90.0 ,0.0])
+        cylinder(h = 6.2, d = m6_screw, center = true, $fn = resolution);
     }
 }
 
@@ -75,12 +83,18 @@ module pulley_mount_front_right()
       translate([0.0, (65.0 / 8.0), 26.0]) cylinder(h = 70.0, d = 3mm_stab, $fn = resolution, center = true);
 
       // m6 mount hole for frame connectivity
-      translate([-18.0, 0.5, 20.0]) rotate([90.0, 0.0, 0.0]) cylinder(h = 6.2, d = m6_screw, center = true, $fn = resolution);
+      translate([-18.0, 0.5, 20.0])
+        rotate([90.0, 0.0, 0.0])
+        cylinder(h = 6.2, d = m6_screw, center = true, $fn = resolution);
       for (i = [-35.0, 0.0, 35.0])
         {
-          translate([0.0, (-65.0 / 2.0) + 15.0, i]) rotate([0.0, 90, 0.0]) cylinder(h = 6.2, d = m6_screw, center = true, $fn = resolution);
+          translate([0.0, (-65.0 / 2.0) + 15.0, i])
+            rotate([0.0, 90, 0.0])
+            cylinder(h = 6.2, d = m6_screw, center = true, $fn = resolution);
         }
-      translate([0.0, (65.0 / 2.0) - 15.0, -35.0]) rotate([0.0, 90.0, 0.0]) cylinder(h = 6.2, d = m6_screw, center = true, $fn = resolution);
+      translate([0.0, (65.0 / 2.0) - 15.0, -35.0])
+        rotate([0.0, 90.0, 0.0])
+        cylinder(h = 6.2, d = m6_screw, center = true, $fn = resolution);
     }
 }
 
