@@ -2,7 +2,7 @@ include <../global_vars.scad>
 
 z = 47.05;
 
-module motor_xy_left()
+module motor_back_left()
 {
   motor_offset_x = 25.74;
   motor_offset_y = -46.29;
@@ -110,7 +110,7 @@ module motor_xy_left()
   }
 }
 
-module pulley_mount_back_left()
+module pulley_back_left()
 {
   x =  15.0;
   y = -15.0;
@@ -163,14 +163,14 @@ module pulley_mount_back_left()
   }
 }
 
-module motor_pulley_xy_left()
+module motor_and_pulley_back_left()
 {
   difference()
   {
     union()
     {
-      pulley_mount_back_left();
-      motor_xy_left();
+      pulley_back_left();
+      motor_back_left();
     }
 
     // motor_xy_left and pulley_mount_back_left combiner
@@ -183,4 +183,4 @@ module motor_pulley_xy_left()
   }
 }
 
-//motor_pulley_xy_left();
+//motor_and_pulley_back_left();
