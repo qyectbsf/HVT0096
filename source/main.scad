@@ -14,17 +14,17 @@ module main()
   upper_belt();
   lower_belt();
 
-  //  frame();
+  frame();
 
   for (i = [1,-1])
-  {
-    y_schiene((30/2 + 420/2) * i);
-  }
+    {
+      y_schiene((30/2 + 420/2) * i);
+    }
 
-  /* translate([-(240+3),-202.5,20]) pulley_mount_front_left(); */
-  /* translate([+(240+3),-202.5,20])  pulley_mount_front_right(); */
+  translate([-(240+3),-202.5,20]) pulley_mount_front_left();
+  translate([+(240+3),-202.5,20])  pulley_mount_front_right();
 
-  /* translate([-225,220,-30]) rotate([0,0,-90]) motor_pulley_xy_left(); */
+  translate([-225,220,-30]) rotate([0,0,-90]) motor_pulley_xy_left();
   /* //xy_right(); */
 
   translate([0,220,0]) rotate([0,0,180]) belt_tentioner();
