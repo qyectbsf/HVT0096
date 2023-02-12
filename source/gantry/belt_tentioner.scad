@@ -85,7 +85,7 @@ module belt_tentioner_arm(r)
       // main structure to subtract form
       union()
       {
-        translate([-24.6/ 2,-19.6/2,0]) cube([24.6,19.6, belts_max_space + 12 +1.6 + 2 ]);
+        translate([-24.6/ 2,-23.6/2,0]) cube([24.6,21.6, belts_max_space + 12 +1.6 + 2 ]);
       }
 
       // pulley cutout
