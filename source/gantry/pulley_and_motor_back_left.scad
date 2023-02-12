@@ -176,13 +176,11 @@ module motor_and_pulley_back_left()
     // motor_xy_left and pulley_mount_back_left combiner
     for (i = [39.0, 88.9])
     {
-      translate([27.0, -21.0, i])
+      translate([27.0, -9.0, i])
         rotate([90.0, 0.0, 0.0])
         cylinder(h = 12.1, d = 3.0, $fn = resolution);
     }
   }
 }
 
-//pulley_back_left();
-//motor_back_left();
-//motor_and_pulley_back_left();
+/* motor_and_pulley_back_left(); */
