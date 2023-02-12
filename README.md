@@ -4,6 +4,8 @@ This repository holds information about my implementation of the HevORT project 
 I have created my own gantry based on the XYSTD gantry and made it compartible with the HevORT project.
 
 ### Hardware
+
+|             |                                                    |
 |-------------|----------------------------------------------------|
 | board       | BIGTREETECH Octopus V1.1                           |
 | extruder    | BIQU H2O Extruder                                  |
