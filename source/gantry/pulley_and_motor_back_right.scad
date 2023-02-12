@@ -183,6 +183,4 @@ module motor_and_pulley_back_right()
   }
 }
 
-//pulley_back_right();
-//motor_back_right();
 //motor_and_pulley_back_right();
