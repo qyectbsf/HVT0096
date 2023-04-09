@@ -56,16 +56,16 @@ module y_rail_mount()
     }
 
   // second
-  /* difference() */
-  /*   { */
-  /*     translate([0,0,30]) rotate([0,180,0]) y_rail_mount_base(); */
-  /*     combiner */
-  /*     for ( y = [-3.5, -13.5, -23.5] ) */
-  /*       { */
-  /*         translate([0, y,15 - 0.1]) cylinder(h = 5 + 0.2, d = m3_screw_tight, $fn = resolution); */
-  /*         translate([0, y,20 - 0.1]) cylinder(h = 10 + 0.2, d = m3_screw_head, $fn = resolution); */
-  /*       } */
-  /*   } */
+  difference()
+    {
+      translate([0,0,30]) rotate([0,180,0]) y_rail_mount_base();
+      // combiner
+      for ( y = [-3.5, -13.5, -23.5] )
+        {
+          translate([0, y,15 - 0.1]) cylinder(h = 5 + 0.2, d = m3_screw_tight, $fn = resolution);
+          translate([0, y,20 - 0.1]) cylinder(h = 10 + 0.2, d = m3_screw_head, $fn = resolution);
+        }
+    }
 }
 
 module y_rail_mount_base()
@@ -83,12 +83,12 @@ module y_rail_mount_base()
         translate([10 , -27, 5]) cube([20, 27, 10]);
         translate([10 , 0, 5]) cube([3, 27, 10]);
         translate([-13 , 0, 5]) cube([3, 27, 2]);
-        translate([-30 , -27, 5]) cube([20, 27, 2]);
+        translate([-30 , -27, 5]) cube([20, 27, 1]);
       }
-      translate([10  , -27 - 0.1, 13]) cube([20.1, 20.1, 2.1]);
+      translate([10  , -27 - 0.1, 14]) cube([20.1, 20.1, 2.1]);
       translate([20,-16.5,2]) cylinder(h = 15, d = 5mm_stab ,$fn = resolution);
 
-      translate([-30 -0.1  , -27 - 0.1, 5]) cube([20.1, 20.1, 2.1]);
+      translate([-30 -0.1  , -27 - 0.1, 4]) cube([20.1, 20.1, 2.1]);
       translate([-20,-16.5,2]) cylinder(h = 10, d = 5mm_stab ,$fn = resolution);
 
       // alu profile mount
@@ -102,14 +102,14 @@ module y_rail_mount_base()
     }
   difference()
     {
-      translate([-20,-16.5,5]) cylinder(h = 1, d1 = 9, d2 = 6,$fn = resolution);
-      translate([-20,-16.5,5 - 0.1]) cylinder(h = 1.2, d = 5mm_stab,$fn = resolution);
+      translate([-20,-16.5,4]) cylinder(h = 1, d1 = 9, d2 = 6,$fn = resolution);
+      translate([-20,-16.5,4 - 0.1]) cylinder(h = 1.2, d = 5mm_stab,$fn = resolution);
     }
 
   difference()
     {
-      translate([20,-16.5,13]) cylinder(h = 1, d1 = 9, d2 = 6,$fn = resolution);
-      translate([20,-16.5,13 - 0.1]) cylinder(h = 1.2, d = 5mm_stab,$fn = resolution);
+      translate([20,-16.5,14]) cylinder(h = 1, d1 = 9, d2 = 6,$fn = resolution);
+      translate([20,-16.5,14 - 0.1]) cylinder(h = 1.2, d = 5mm_stab,$fn = resolution);
     }
 }
 
