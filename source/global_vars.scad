@@ -1,12 +1,13 @@
 show_belts = 1;
 show_frame = 0;
 show_z_struct = 0;
+show_xy_struct = 1;
 show_bed = 0;
 show_bed_angle_marker = 0;
 
-show_left = 0;
-show_right = 0;
-show_back = 0;
+show_left = 1;
+show_right = 1;
+show_back = 1;
 
 show_addatives = 1;
 
@@ -18,12 +19,15 @@ belt_thickness = 1.5;
 belt_height = 6.0;
 belt_distance = 12;
 
-motor_offset_x = 25.74;
-motor_offset_y = -46.29;
-motor_offset_z = 60.45;
+frame_back_left_x = -225;
+frame_back_left_y = 370;
 
-motor_abs_offset_x = -270.0;
+motor_abs_offset_x = -271.0;
 motor_abs_offset_y = 342.0;
+
+motor_rel_offset_x = motor_abs_offset_x - frame_back_left_x;
+motor_rel_offset_y = motor_abs_offset_y - frame_back_left_y;
+
 
 lower_belt_split_lengths =
   [80 + current_x_position,
@@ -97,7 +101,7 @@ lower_belt_y_coordinates =
    lower_belt_idler_y_coordinates[8],
    lower_belt_idler_y_coordinates[9] + ( belt_distance + belt_thickness ) / 2];
 
-lower_belt_z = 13 + 8;
+lower_belt_z = 20;
 lower_belt_idler_z = lower_belt_z -3;
 
 upper_belt_split_lengths =
@@ -105,7 +109,7 @@ upper_belt_split_lengths =
    80 + current_y_position,
    530,
    43,
-   170,
+   171,
    38,
    38,
    248,
@@ -116,7 +120,7 @@ upper_belt_rotations =
   [270,
    0,
    180,
-   216.2,
+   180 + 37.2,
    90,
    110,
    70,
@@ -127,7 +131,7 @@ upper_belt_rotations =
 upper_belt_idler_x_coordinates =
   [-228,
    -241.5,
-   -245 - belt_distance - belt_thickness + 3,
+   -241.5 - belt_distance - belt_thickness,
    motor_abs_offset_x,
    -100,
    -60,
@@ -172,9 +176,10 @@ upper_belt_y_coordinates =
    upper_belt_idler_y_coordinates[8],
    upper_belt_idler_y_coordinates[9] - ( belt_distance + belt_thickness ) / 2,];
 
-
-upper_belt_z = 13 + 16;
+upper_belt_z = 30;
 upper_belt_idler_z = upper_belt_z -3;
+
+printed_wall_width = 6.5;
 
 belts_max_space = 21.95;
 
@@ -299,7 +304,7 @@ module z_motor()
   cylinder(h = 24, d = 5, $fn = resolution);
 }
 
-module pulley_cutout(width)
+module idler_cutout(width)
 {
   difference()
     {
@@ -309,7 +314,7 @@ module pulley_cutout(width)
           translate([0,0,pulley_cutout_height / 2])
             rotate([r,0,0])
             translate([0,0,pulley_cutout_height / 2 - 1])
-            cylinder(h = 1, d1 = 6, d2 = 10, $fn = resolution);
+            cylinder(h = 1, d1 = 6, d2 = 8, $fn = resolution);
         }
     }
 }
@@ -365,6 +370,36 @@ module z_ball_screw_shaft_cutout_upper()
     polygon(points=[[0,-0.1],[11.125,-0.1],[11.125,7.249],
                     [9.0475,7.249],[9.0475,20],[0,20]]
             );
+}
+
+module xy_motor_shaft_cutout()
+{
+  rotate_extrude($fn = resolution)
+    polygon(points=[[0.0, -0.1], [23 / 2, -0.1], [23 / 2, 1.5],
+                    [17 / 2, 1.5], [17/2, 20.9], [13 / 2, 20.9],
+                    [13 / 2, 25], [6 / 2, 25], [6 / 2, 26],
+                    [0, 26]]);
+}
+
+module xy_motor_screw_cutout()
+{
+  for ( x = [-1,1], y = [-1,1] )
+    {
+      union()
+      {
+        translate([x * 17.25, y * 17.25, -0.1]) cylinder(h = 5.5, d = 2.9, $fn = resolution);
+        translate([x * 17.25, y * 17.25, 5.2]) cylinder(h = 100, d = 5, $fn = resolution);
+      }
+    }
+}
+
+module xy_m6_screw_cutout()
+{
+  union()
+  {
+    translate([0,0,-0.1])cylinder(h = 6.2, d = m6_screw, $fn = resolution);
+    translate([0,0,6.0])cylinder(h = 70, d = 12, $fn = resolution);
+  }
 }
 
 module z_ball_screw_shaft_cutout_lower()
@@ -501,6 +536,16 @@ module mgn_h_block_cutout()
       }
   }
 }
+
+module nema_17_25mm_shaft()
+{
+  union()
+  {
+    translate([0,0,1]) rotate([0,180,0]) motor(Nema17, NemaMedium, dualAxis=false);
+    cylinder(h = 25, d = 5, $fn = resolution);
+  }
+}
+
 
 //rosengelenkstangenkugellager_mount();
 //rosengelenkstangenkugellager();

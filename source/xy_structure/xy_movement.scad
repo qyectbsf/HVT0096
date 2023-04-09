@@ -6,6 +6,8 @@ module y_movement()
 
   // 20x20 alu profile
 
+  translate([0, -130, 28]) cube([420,20,20], center = true);
+
   /* translate([0,- 152.15 + 65,19.2]) x_schiene(0); */
 
   for ( i = [1,-1] ) translate([(30/2 + 420/2)*i, -130 - 44.4 / 2, 0]) mgn_12_h();

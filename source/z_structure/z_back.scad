@@ -1,5 +1,3 @@
-include <MCAD/2Dshapes.scad>;
-
 include <../global_vars.scad>
 include <../stl_files/main.scad>
 
@@ -22,7 +20,7 @@ module z_back()
                  -210 + z_bottom_object_height - 0.2 + 24 - current_z_position - g])
         z_back_middle_object_addatives();
 
-      translate([0, 220, -512 - 0.2]) z_back_bottom_object_addatives();
+      translate([0, 220 + ball_screw_back_relative_y, -512 - 0.2]) z_back_bottom_object_addatives();
 
       translate([0, 205 + 40,-30]) rotate([-90,0,180]) z_rail();
 
@@ -37,11 +35,6 @@ module z_back()
                  -210 + z_bottom_object_height - 0.2 - 160 - current_z_position - g])
         rotate([0,-90,180])
         z_ball_screw_flanschmutter();
-
-      translate([0,
-                 220 + ball_screw_back_relative_y,
-                 -510 - 0.2])
-        z_motor();
     }
 }
 
@@ -313,6 +306,7 @@ module z_back_bottom_object()
 
 module z_back_bottom_object_addatives()
 {
+  nema_17_25mm_shaft();
 }
 
 /* z_back(); */
