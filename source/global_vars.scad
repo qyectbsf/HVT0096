@@ -9,10 +9,18 @@ show_left = 1;
 show_right = 1;
 show_back = 1;
 
+show_xy_back_left = 1;
+show_xy_back_right = 1;
+show_xy_front_left = 1;
+show_xy_front_right = 1;
+
+show_xy_left = 1;
+show_xy_right = 1;
+
 show_addatives = 1;
 
-current_x_position = 0.0;
-current_y_position = 0.0;
+current_x_position = 300.0;
+current_y_position = 400.0;
 current_z_position = -13.0 + 0.0;
 
 belt_thickness = 1.5;
@@ -545,6 +553,17 @@ module nema_17_25mm_shaft()
     cylinder(h = 25, d = 5, $fn = resolution);
   }
 }
+
+module primary_back_left_subract_void(x, y, z, cube_x, cube_y, cube_z)
+{
+  translate([x, y, z])
+    minkowski()
+    {
+      cube([cube_x, cube_y, cube_z]);
+      sphere(d = 7 , $fn = resolution);
+    }
+}
+
 
 
 //rosengelenkstangenkugellager_mount();

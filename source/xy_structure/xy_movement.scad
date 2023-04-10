@@ -6,7 +6,7 @@ module y_movement()
 
   // 20x20 alu profile
 
-  translate([0, -130, 28]) cube([420,20,20], center = true);
+  //translate([0, -130, 28]) cube([420,20,20], center = true);
 
   /* translate([0,- 152.15 + 65,19.2]) x_schiene(0); */
 
@@ -27,7 +27,7 @@ module y_movement()
 module x_movement()
 {
   //translate([22.2 + - 150, - 152.15 + 65,19.2]) rotate([0,180,90]) mgn_12_h();
-  translate([22.2 + - 150, - 152.15 + 65,19.2+ 20]) rotate([0,0,90]) mgn_12_h();
+  //translate([22.2 + - 150, - 152.15 + 65,19.2+ 20]) rotate([0,0,90]) mgn_12_h();
 
   //translate([- 150,- 152.14 + 65,0]) carriage_qye();
   //translate([-150,- 152.14 + 65, 26.2 + 13 - 52]) carriage_e3d();
