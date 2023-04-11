@@ -65,12 +65,12 @@ module primary_back_left()
           {
             hull()
               {
-                cylinder(h = pulley_cutout_height, d = 19, $fn = resolution);
+                cylinder(h = idler_cutout_height, d = 19, $fn = resolution);
                 translate([0,-30,0])
-                  cylinder(h = pulley_cutout_height, d = 19, $fn = resolution);
+                  cylinder(h = idler_cutout_height, d = 19, $fn = resolution);
 
               }
-            cylinder(h = pulley_cutout_height, d = 19, $fn = resolution);
+            cylinder(h = idler_cutout_height, d = 19, $fn = resolution);
 
           }
         translate([motor_rel_offset_x + 16, motor_rel_offset_y - 42, 10])
@@ -109,7 +109,7 @@ module secondary_back_left()
         {
           translate([-15.1, -45.1, lower_belt_z - 3]) cube([30.2,30.2,upper_belt_z - lower_belt_z + 6 + 6]);
           translate([-7.4,  -45.1, lower_belt_z - 3]) cube([22.5,22.5, upper_belt_z - lower_belt_z + 6 + 6]);
-          translate([-3,-28,lower_belt_z - 3]) cylinder(h = pulley_cutout_height, d = 19, $fn = resolution);
+          translate([-3,-28,lower_belt_z - 3]) cylinder(h = idler_cutout_height, d = 19, $fn = resolution);
         }
 
       // subtract 5mm stab
