@@ -4,6 +4,28 @@ module block_front_left()
 {
   difference()
     {
+      union()
+      {
+        block_front_left_primary();
+        block_front_left_secondary();
+      }
+
+      // combiner
+      for ( z = [lower_belt_z - 6 - 10, upper_belt_z + 6 + 6 + 10] )
+        {
+          translate([-15,40,z]) rotate([0,-90,0]) union()
+            {
+              cylinder(h = 10, d = m3_screw_tight, $fn = resolution);
+              translate([0,0,10]) cylinder(h = 50, d = m3_screw_head, $fn = resolution);
+            }
+        }
+    }
+}
+
+module block_front_left_primary()
+{
+  difference()
+    {
       // main structure to subtract from
       union()
       {
@@ -20,19 +42,6 @@ module block_front_left()
               }
           }
       }
-
-      /* // space for optical sensor */
-      /* translate([13.5, 27.4 - 3.0, 33.8]) cube([9.0, 11.7 - 1.6, 13.0], center = true); */
-      /* translate([13.5 - 1.7, 27.4 - 3.0, 27.0]) cube([9.0, 5.0, 13.0], center = true); */
-
-      /* // m3 hole to mount optical sensor into */
-      /* translate([4.0, 27.38 - 3.0, 36.7]) */
-      /*   rotate([0.0, 90.0, 0.0]) */
-      /*   cylinder(h = 15.0, d = 2.9, center = true, $fn = resolution); */
-
-      /* // space for connector of optical sensor */
-      /* translate([0.0, 27.4 - 3.0, 9.45]) cube([6.2, 12.0, 7.7], center = true); */
-
       // space for idler
       translate([-16.5, 30, upper_belt_idler_z]) idler_cutout(21);
 
@@ -52,6 +61,24 @@ module block_front_left()
       translate([-18, 30, -15.0])
         rotate([0.0, 90.0 ,0.0])
         cylinder(h = 10, d = m6_screw, center = true, $fn = resolution);
+    }
+}
+
+module block_front_left_secondary()
+{
+  translate([0,20,0]) union()
+    {
+      rotate([90,0,0])
+        linear_extrude(height = 5, convexity = 10)
+        polygon(points = [[-21.5,-8.715], [-55,lower_belt_z], [-55,upper_belt_z + 6],
+                          [-21.5,68.55]]);
+
+      translate([0,30,0])
+        rotate([90,0,0])
+        linear_extrude(height = 30, convexity = 10)
+        polygon(points = [[-21.5,-8.715], [-55,lower_belt_z], [-55,upper_belt_z + 6],
+                          [-21.5,68.55], [-21.5, upper_belt_z + 6 + 6], [-35,upper_belt_z + 6 + 6],
+                          [-35,lower_belt_z - 6], [-21.5,lower_belt_z - 6]]);
     }
 }
 
