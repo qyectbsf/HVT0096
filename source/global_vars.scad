@@ -1,26 +1,30 @@
 show_belts = 1;
 show_frame = 0;
+
 show_z_struct = 0;
+show_z_left = 1;
+show_z_right = 1;
+show_z_back = 1;
+
 show_xy_struct = 1;
+show_xy_back_left = 0;
+show_xy_back_right = 0;
+show_xy_front_left = 0;
+show_xy_front_right = 0;
+show_xy_left = 0;
+show_xy_right = 0;
+show_xy_back = 1;
+
 show_bed = 0;
+show_bed_left = 1;
+show_bed_right = 1;
+show_bed_back = 1;
+
 show_bed_angle_marker = 0;
-
-show_left = 1;
-show_right = 1;
-show_back = 1;
-
-show_xy_back_left = 1;
-show_xy_back_right = 1;
-show_xy_front_left = 1;
-show_xy_front_right = 1;
-
-show_xy_left = 1;
-show_xy_right = 1;
-
 show_addatives = 1;
 
-current_x_position = 300.0;
-current_y_position = 400.0;
+current_x_position = 0.0;
+current_y_position = 0.0;
 current_z_position = -13.0 + 0.0;
 
 belt_thickness = 1.5;
@@ -64,9 +68,9 @@ lower_belt_rotations =
 lower_belt_idler_x_coordinates =
   [-228,
    -228,
-   20,
-   60,
-   100,
+   31/2 + 2.5,
+   31/2 + 2.5 + 31 * 1,
+   31/2 + 2.5 + 31 * 2,
    -motor_abs_offset_x,
    +245 + belt_distance + belt_thickness - 3,
    241.5,
@@ -141,9 +145,9 @@ upper_belt_idler_x_coordinates =
    -241.5,
    -241.5 - belt_distance - belt_thickness,
    motor_abs_offset_x,
-   -100,
-   -60,
-   -20,
+   -(31/2 + 2.5 + 31 * 2),
+   -(31/2 + 2.5 + 31 * 1),
+   -(31/2 + 2.5),
    228,
    228,
    -180 + current_x_position];
@@ -225,8 +229,8 @@ left_bed_rail_angle = 0.0;
 right_bed_rail_angle = -left_bed_rail_angle;
 back_bed_rail_angle = 0.0;
 
-pulley_height = 10.0;
-pulley_cutout_height = pulley_height + 2;
+idler_height = 10.0;
+idler_cutout_height = idler_height + 2;
 
 mcl_clamp_height = 9.0;
 
@@ -316,53 +320,30 @@ module idler_cutout(width)
 {
   difference()
     {
-      cylinder(h = pulley_cutout_height, d = width, $fn = resolution);
-      for (r =  [0,180] )
+      cylinder(h = idler_cutout_height, d = width, $fn = resolution);
+      for (r =  [0, 180] )
         {
-          translate([0,0,pulley_cutout_height / 2])
-            rotate([r,0,0])
-            translate([0,0,pulley_cutout_height / 2 - 1])
+          translate([0, 0, idler_cutout_height / 2])
+            rotate([r, 0, 0])
+            translate([0, 0, idler_cutout_height / 2 - 1])
             cylinder(h = 1, d1 = 6, d2 = 8, $fn = resolution);
         }
     }
 }
 
-module pulley_cutout_old(width)
+module idler_cutout_inverse()
 {
   difference()
-  {
-    translate([0.0, 0.0, pulley_cutout_height/2])
-      cylinder(h = pulley_cutout_height, d = width, center = true, $fn = resolution);
-    pulley_cutout_inverse(width);
-  }
-}
-
-module pulley_cutout_inverse(width)
-{
-  bearing_mount_inner_width = 4.4;
-  bearing_mount_outer_width = 9.0;
-  bearing_mount_height = 1.0;
-
-  difference()
-  {
-    union()
     {
-      translate([0.0, 0.0, pulley_cutout_height/2 + 4.9])
-        cylinder(h = bearing_mount_height,
-                 d1 = bearing_mount_inner_width,
-                 d2 = bearing_mount_outer_width,
-                 center = true,
-                 $fn = resolution);
-      translate([0.0, 0.0, pulley_cutout_height/2 - 4.9])
-        cylinder(h = bearing_mount_height,
-                 d1 = bearing_mount_outer_width,
-                 d2 = bearing_mount_inner_width,
-                 center = true,
-                 $fn = resolution);
+      union()
+      {
+        translate([0, 0, idler_cutout_height - 1])
+          cylinder(h = 1, d1 = 6, d2 = 8, $fn = resolution);
+        cylinder(h = 1, d1 = 8, d2 = 6, $fn = resolution);
+      }
+      translate([0, 0, -0.1])
+        cylinder(h = idler_cutout_height + 0.2, d = 5mm_stab, $fn = resolution);
     }
-    translate([0.0, 0.0, pulley_cutout_height/2])
-      cylinder(h = pulley_cutout_height, d = 3mm_stab, center = true, $fn = resolution);
-  }
 }
 
 module bed_alu_mount_hole()
@@ -554,7 +535,7 @@ module nema_17_25mm_shaft()
   }
 }
 
-module primary_back_left_subract_void(x, y, z, cube_x, cube_y, cube_z)
+module subract_void(x, y, z, cube_x, cube_y, cube_z)
 {
   translate([x, y, z])
     minkowski()
