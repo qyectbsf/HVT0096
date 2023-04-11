@@ -3,21 +3,21 @@ resolution = 20.0;
 show_belts = 1;
 show_frame = 1;
 
-show_z_struct = 9;
+show_z_struct = 1;
 show_z_left = 1;
 show_z_right = 1;
 show_z_back = 1;
 
 show_xy_struct = 1;
-show_xy_back_left = 0;
-show_xy_back_right = 0;
-show_xy_front_left = 0;
-show_xy_front_right = 0;
-show_xy_left = 0;
-show_xy_right = 0;
+show_xy_back_left = 1;
+show_xy_back_right = 1;
+show_xy_front_left = 1;
+show_xy_front_right = 1;
+show_xy_left = 1;
+show_xy_right = 1;
 show_xy_back = 1;
 
-show_bed = 0;
+show_bed = 1;
 show_bed_left = 1;
 show_bed_right = 1;
 show_bed_back = 1;
