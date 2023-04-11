@@ -1,7 +1,7 @@
 include <../global_vars.scad>
 include <../stl_files/main.scad>
 
-include <../frame/main.scad>
+include <../frame_structure/main.scad>
 
 include <bed_left.scad>
 include <bed_right.scad>
@@ -37,7 +37,7 @@ module bed()
 
   if ( show_bed == 1 )
     {
-      if ( show_left == 1 )
+      if ( show_bed_left == 1 )
         {
           translate([-bed_frame_x / 2,
                      -bed_frame_y / 2 - bed_frame_offset_y,
@@ -54,7 +54,7 @@ module bed()
             }
         }
 
-      if ( show_right == 1 )
+      if ( show_bed_right == 1 )
         {
           translate([bed_frame_x / 2,
                      -bed_frame_y / 2 - bed_frame_offset_y,
@@ -71,7 +71,7 @@ module bed()
             }
         }
 
-      if ( show_back == 1 )
+      if ( show_bed_back == 1 )
         {
           translate([0,
                      124.5,
