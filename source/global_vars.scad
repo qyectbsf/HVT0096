@@ -1,7 +1,9 @@
-show_belts = 1;
-show_frame = 0;
+resolution = 20.0;
 
-show_z_struct = 0;
+show_belts = 1;
+show_frame = 1;
+
+show_z_struct = 9;
 show_z_left = 1;
 show_z_right = 1;
 show_z_back = 1;
@@ -30,6 +32,9 @@ current_z_position = -13.0 + 0.0;
 belt_thickness = 1.5;
 belt_height = 6.0;
 belt_distance = 12;
+
+// 0 to 14.5
+belt_tention_strength = 0;
 
 frame_back_left_x = -225;
 frame_back_left_y = 370;
@@ -81,7 +86,7 @@ lower_belt_idler_y_coordinates =
   [-110 + current_y_position,
    motor_abs_offset_y,
    motor_abs_offset_y + belt_distance + belt_thickness,
-   motor_abs_offset_y + belt_distance + belt_thickness,
+   motor_abs_offset_y + belt_distance + belt_thickness + belt_tention_strength,
    motor_abs_offset_y + belt_distance + belt_thickness,
    motor_abs_offset_y,
    300,
@@ -158,7 +163,7 @@ upper_belt_idler_y_coordinates =
    300,
    motor_abs_offset_y,
    motor_abs_offset_y + belt_distance + belt_thickness,
-   motor_abs_offset_y + belt_distance + belt_thickness,
+   motor_abs_offset_y + belt_distance + belt_thickness + belt_tention_strength,
    motor_abs_offset_y + belt_distance + belt_thickness,
    motor_abs_offset_y,
    -110 + current_y_position,
@@ -209,10 +214,6 @@ m4_nut = 8.4;
 5mm_stab = 5.2;
 
 z_rail_z_offset = 26.0;
-
-
-// 10 for compile speed 200 for final export
-resolution = 20.0;
 
 //ball_screw_left_relative_x = 36.15;
 ball_screw_left_relative_x = 38;
