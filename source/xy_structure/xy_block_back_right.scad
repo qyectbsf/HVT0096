@@ -34,14 +34,14 @@ module primary_back_right()
           }
 
         // subtract main voids
-        primary_back_left_subract_void( x = 15 + 6.5 + 3.5, y = motor_rel_offset_y - 21.0, z = -30.0,
-                                        cube_x = 44.0, cube_y = 42.0, cube_z = lower_belt_z + 14.2 );
+        subract_void( x = 15 + 6.5 + 3.5, y = motor_rel_offset_y - 21.0, z = -30.0,
+                      cube_x = 44.0, cube_y = 42.0, cube_z = lower_belt_z + 14.2 );
 
-        primary_back_left_subract_void( x = 15 + 6.5 + 3.5, y = motor_rel_offset_y - 21.0, z = lower_belt_z - 3.8,
-                                        cube_x = 44.0, cube_y = 42.0, cube_z =  9.0 );
+        subract_void( x = 15 + 6.5 + 3.5, y = motor_rel_offset_y - 21.0, z = lower_belt_z - 3.8,
+                      cube_x = 44.0, cube_y = 42.0, cube_z =  9.0 );
 
-        primary_back_left_subract_void( x = 15 + 6.5 + 3.5 + 7, y = -76.5, z = lower_belt_z + 17.1,
-                                        cube_x = 44.0, cube_y = 83.0, cube_z = lower_belt_z + 14.2 );
+        subract_void( x = 15 + 6.5 + 3.5 + 7, y = -76.5, z = lower_belt_z + 17.1,
+                      cube_x = 44.0, cube_y = 83.0, cube_z = lower_belt_z + 14.2 );
 
         // motor shaft and m3 screws
         translate([-motor_rel_offset_x, motor_rel_offset_y, lower_belt_z - 12.3]) xy_motor_shaft_cutout();
@@ -93,11 +93,11 @@ module secondary_back_right()
       translate([-15.0, -45.0, 0]) cube([30,30,70]);
 
       // subtract void
-      primary_back_left_subract_void( x = -15, y = -45, z = 0,
-                                      cube_x = 30 - 5 - 3.5, cube_y = 30 - 5 - 3.5,  cube_z = lower_belt_z - 3.5 - 5 -3);
+      subract_void( x = -15, y = -45, z = 0,
+                    cube_x = 30 - 5 - 3.5, cube_y = 30 - 5 - 3.5,  cube_z = lower_belt_z - 3.5 - 5 -3);
 
-      primary_back_left_subract_void( x = -15, y = -45, z = upper_belt_z + belt_height + 5 + 3.5 + 3,
-                                      cube_x = 30 - 5 - 3.5, cube_y = 30 - 5 - 3.5,  cube_z = 30 );
+      subract_void( x = -15, y = -45, z = upper_belt_z + belt_height + 5 + 3.5 + 3,
+                    cube_x = 30 - 5 - 3.5, cube_y = 30 - 5 - 3.5,  cube_z = 30 );
 
       // subtract m6 alu mount
       translate([0,-14.9, 55]) rotate([90,0,0]) cylinder(h = 5.2, d = m6_screw, $fn = resolution);
