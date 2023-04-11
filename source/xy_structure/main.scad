@@ -11,6 +11,7 @@ include <xy_block_front_right.scad>
 
 include <xy_block_left.scad>
 include <xy_block_right.scad>
+include <xy_block_back.scad>
 
 module xy_structure()
 {
@@ -76,6 +77,14 @@ module xy_structure()
             }
         }
 
+      if ( show_xy_back == 1 )
+        {
+          translate([0,220 + 150,0]) union()
+            {
+              block_back();
+              block_back_addatives();
+            }
+        }
 
       //translate([0, current_y_position, 0]) y_movement();
     }
