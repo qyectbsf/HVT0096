@@ -1,0 +1,11 @@
+# .github/workflows/ci.yml
+# This file tells GitHub Actions how to run CI for your project
+name: CI # The name of the workflow (shows up in GitHub)
+on: [push] # Trigger: run this workflow on every push
+jobs:
+  build: # Job name (can be anything)
+    runs-on: ubuntu-latest # Runner: use the latest Ubuntu server
+    steps:
+      - uses: actions/checkout@v7 # Step: check out your code from the repo
+      - name: Run tests # Step: give this step a name
+        run: npm test # Step: run your project's tests
