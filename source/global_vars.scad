@@ -118,7 +118,7 @@ lower_belt_y_coordinates =
    lower_belt_idler_y_coordinates[8],
    lower_belt_idler_y_coordinates[9] + ( belt_distance + belt_thickness ) / 2];
 
-lower_belt_z = 20;
+lower_belt_z = 23.5;
 lower_belt_idler_z = lower_belt_z -3;
 
 upper_belt_split_lengths =
@@ -193,7 +193,7 @@ upper_belt_y_coordinates =
    upper_belt_idler_y_coordinates[8],
    upper_belt_idler_y_coordinates[9] - ( belt_distance + belt_thickness ) / 2,];
 
-upper_belt_z = 30;
+upper_belt_z = 34.5;
 upper_belt_idler_z = upper_belt_z -3;
 
 printed_wall_width = 6.5;
@@ -365,7 +365,7 @@ module z_ball_screw_shaft_cutout_upper()
 module xy_motor_shaft_cutout()
 {
   rotate_extrude($fn = resolution)
-    polygon(points=[[0.0, -0.1], [23 / 2, -0.1], [23 / 2, 1.5],
+    polygon(points=[[0.0, -1.0], [23 / 2, -1.0], [23 / 2, 1.5],
                     [17 / 2, 1.5], [17/2, 20.9], [13 / 2, 20.9],
                     [13 / 2, 25], [6 / 2, 25], [6 / 2, 26],
                     [0, 26]]);
