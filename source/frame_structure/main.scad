@@ -22,65 +22,65 @@ module 30x30l_i_typ_nut_6_2d() {
   }
 }
 
-module 20x20l_i_typ_nut_5_2d() {
-  difference()
-    {
-      minkowski()
-        {
-          s = 4;
+// module 20x20l_i_typ_nut_5_2d() {
+//   difference()
+//     {
+//       minkowski()
+//         {
+//           s = 4;
 
-          square(size = 20 - s, center = true);
-          circle(d=s, $fn=200);
-        }
+//           square(size = 20 - s, center = true);
+//           circle(d=s, $fn=200);
+//         }
 
-      for (i = [0,1,2,3])
-        {
-          rotate([0,0,i * 90])
-            polygon(
-                    points=[
-                            [-2.5,-10],[-2.5,-8],[-6.5,-8],
-                            [-2.5,-4],[2.5,-4],[6.5,-8],
-                            [2.5,-8],[2.5,-10]],
-                    paths=[[0,1,2,3,4,5,6,7]]
-                    );
-        }
+//       for (i = [0,1,2,3])
+//         {
+//           rotate([0,0,i * 90])
+//             polygon(
+//                     points=[
+//                             [-2.5,-10],[-2.5,-8],[-6.5,-8],
+//                             [-2.5,-4],[2.5,-4],[6.5,-8],
+//                             [2.5,-8],[2.5,-10]],
+//                     paths=[[0,1,2,3,4,5,6,7]]
+//                     );
+//         }
 
-      circle(d = 4.3, $fn = 20);
-    }
-}
+//       circle(d = 4.3, $fn = 20);
+//     }
+// }
 
 module 30x30l_i_typ_nut_6_3d(h) {
   linear_extrude(height = h, convexity = 10, twist = 0) 30x30l_i_typ_nut_6_2d();
 }
 
-module 20x20l_i_typ_nut_5_3d(h) {
-  linear_extrude(height = h, convexity = 10, twist = 0) 20x20l_i_typ_nut_5_2d();
-}
+// module 20x20l_i_typ_nut_5_3d(h) {
+//   linear_extrude(height = h, convexity = 10, twist = 0) 20x20l_i_typ_nut_5_2d();
+// }
 
 module frame()
 {
   if ( show_frame == 1 )
     {
-      translate([ 210 + 15,-205 - 15,0]) 30x30l_i_typ_nut_6_3d(h = 880);
-      translate([-210 - 15,-205 - 15,0]) 30x30l_i_typ_nut_6_3d(h = 880);
-      translate([-210 - 15, 205 + 15,0]) 30x30l_i_typ_nut_6_3d(h = 880);
-      translate([ 210 + 15, 205 + 15,0]) 30x30l_i_typ_nut_6_3d(h = 880);
+      translate([ 210 + 15,-205 - 15, 0]) 30x30l_i_typ_nut_6_3d(h = 880);
+      translate([-210 - 15,-205 - 15, 0]) 30x30l_i_typ_nut_6_3d(h = 880);
+      translate([-210 - 15, 205 + 15, 0]) 30x30l_i_typ_nut_6_3d(h = 880);
+      translate([ 210 + 15, 205 + 15, 0]) 30x30l_i_typ_nut_6_3d(h = 880);
 
-      translate([-210,-205 -15,15]) rotate([0,90,0]) 30x30l_i_typ_nut_6_3d(h = 420);
-      translate([-210,205 + 15,15]) rotate([0,90,0]) 30x30l_i_typ_nut_6_3d(h = 420);
-      translate([-210, 205 + 15,555]) rotate([0,90,0]) 30x30l_i_typ_nut_6_3d(h = 420);
-      translate([-210, -205 - 15,880 - 15]) rotate([0,90,0]) 30x30l_i_typ_nut_6_3d(h = 420);
-      translate([-210, 205 + 15,880 - 15]) rotate([0,90,0]) 30x30l_i_typ_nut_6_3d(h = 420);
+      translate([-210,-205 - 15,       15]) rotate([0,90,0]) 30x30l_i_typ_nut_6_3d(h = 420);
+      translate([-210, 205 + 15,       15]) rotate([0,90,0]) 30x30l_i_typ_nut_6_3d(h = 420);
+      translate([-210, 205 + 15, 510 + 45]) rotate([0,90,0]) 30x30l_i_typ_nut_6_3d(h = 420);
+      translate([-210,-205 - 15, 880 - 15]) rotate([0,90,0]) 30x30l_i_typ_nut_6_3d(h = 420);
+      translate([-210, 205 + 15, 880 - 15]) rotate([0,90,0]) 30x30l_i_typ_nut_6_3d(h = 420);
 
-      translate([-210 - 15,-205,15]) rotate([-90,0,0]) 30x30l_i_typ_nut_6_3d(h = 410);
-      translate([210 + 15,-205,15]) rotate([-90,0,0]) 30x30l_i_typ_nut_6_3d(h = 410);
-      translate([-210 - 15,-205,555]) rotate([-90,0,0]) 30x30l_i_typ_nut_6_3d(h = 410);
-      translate([210 + 15,-205,555]) rotate([-90,0,0]) 30x30l_i_typ_nut_6_3d(h = 410);
-      translate([-210 -15,-205,880 -15]) rotate([-90,0,0]) 30x30l_i_typ_nut_6_3d(h = 410);
-      translate([210 + 15,-205,880 -15]) rotate([-90,0,0]) 30x30l_i_typ_nut_6_3d(h = 410);
+      translate([-210 - 15,-205,       15]) rotate([-90,0,0]) 30x30l_i_typ_nut_6_3d(h = 410);
+      translate([ 210 + 15,-205,       15]) rotate([-90,0,0]) 30x30l_i_typ_nut_6_3d(h = 410);
+      translate([-210 - 15,-205, 510 + 45]) rotate([-90,0,0]) 30x30l_i_typ_nut_6_3d(h = 410);
+      translate([ 210 + 15,-205, 510 + 45]) rotate([-90,0,0]) 30x30l_i_typ_nut_6_3d(h = 410);
+      // translate([-210 - 15,-205, 880 - 15]) rotate([-90,0,0]) 30x30l_i_typ_nut_6_3d(h = 410);
+      // translate([ 210 + 15,-205, 880 - 15]) rotate([-90,0,0]) 30x30l_i_typ_nut_6_3d(h = 410);
 
-      translate([-225,-205 + 15,30]) 30x30l_i_typ_nut_6_3d(h = 510);
-      translate([225,-205 + 15,30]) 30x30l_i_typ_nut_6_3d(h = 510);
-      translate([0, 205 + 15, 30]) 30x30l_i_typ_nut_6_3d(h = 510);
+      translate([-225,-205 + 15, 30]) 30x30l_i_typ_nut_6_3d(h = 510);
+      translate([ 225,-205 + 15, 30]) 30x30l_i_typ_nut_6_3d(h = 510);
+      translate([   0, 205 + 15, 30]) 30x30l_i_typ_nut_6_3d(h = 510);
     }
 }

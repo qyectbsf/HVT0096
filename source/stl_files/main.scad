@@ -190,75 +190,6 @@ module idler_cutout_wip() {
   }
 }
 
-module y_rail_mount_left() {
-  difference() {
-    union() {
-      translate([-13.1,-28.3 / 2,0])
-        cube([52, 28.3, 36]);
-      translate([13.5,-28.3 / 2,-10])
-        cube([25.4, 28.3, 10]);
-    }
-    translate([13.50,-10,6.20])
-      cube([40,20,20]);
-
-
-    translate([29.5,-28.3 / 2,-13.5])
-      minkowski()
-      {
-        cube([20, 28.3, 10]);
-        sphere(d = 7 , $fn = resolution);
-      }
-    for (i = [20.1, 32.9]) {
-      translate([i,0,-20])
-        cylinder(r = 2.6, h = 60, $fn = resolution);
-    }
-    for (i = [-1, 1]) {
-      translate([13.4, 8 * i, -5])
-        rotate([0,90,0])
-        cylinder(r = 3.1754, h = 2.5, $fn = 6);
-      translate([15.8, 8 * i, -5])
-        rotate([0,90,0])
-        cylinder(r = 1.6, h = 10.3, $fn = resolution);
-      translate([26, 8 * i, -5])
-        rotate([0,90,0])
-        cylinder(r = 3.5, h = 10.3, $fn = resolution);
-    }
-
-    translate([-3,-8,lower_belt_z - 15]) idler_cutout_wip();
-    translate([-3,8,upper_belt_z - 15]) idler_cutout_wip();
-
-    translate([-3,-8,-0.1]) cylinder(h = 50, d = 3.1, $fn = resolution);
-    translate([-3,8,-0.1]) cylinder(h = 50, d = 3.1, $fn = resolution);
-
-    translate([-13.2 + 27,14.15 - 1.9 - 0.15,upper_belt_z -15 + 5])
-      cube([54,4.3,8], center = true);
-    translate([-13.2,0,upper_belt_z -15 + 5])
-      cube([10,28.4,11.1], center = true);
-
-    translate([-13.2 + 27,-14.15 + 1.9 + 0.15,lower_belt_z -15 + 5])
-      cube([54,4.3,8], center = true);
-    translate([-13.2,0,lower_belt_z -15 + 5])
-      cube([10,28.4,11.1], center = true);
-
-    for (i = [-1,1]) {
-      translate([10,7.5 * i,-0.1])
-      cylinder(h = 40, r = 1.6, $fn = resolution);
-    }
-    for (i = [-1,1]) {
-      translate([-10,7.5 * i,-0.1])
-        cylinder(h = 10, r = 1.6, $fn = resolution);
-    }
-    for (i = [-1,1]) {
-      hull() {
-      translate([-10,7.5 * i,4.0])
-        cylinder(h = 10, r = 3, $fn = resolution);
-      translate([-15,7.5 * i,4.0])
-        cylinder(h = 50, r = 3, $fn = resolution);
-      }
-    }
-  }
-}
-
 module left_upper_mod()
 {
   difference()
@@ -319,16 +250,14 @@ module left() {
   }
 }
 
-module y_left_guide()
+module y_left_guide_hevort()
 {
   translate([18.9,-24.4,40 - 4.95 + 0.15]) rotate([180,0,180]) left_upper_mod();
   translate([-0.5 + 15 - (3.2 / 2), 8.25 - (3.2/2) + 7.5, -9]) rotate([90,0,0]) left_lower_mod();
 }
 
-module y_right_guide()
+module y_right_guide_hevort()
 {
   translate([-12.9,-8.05,35 + 0.15]) rotate([0,180,0]) right_upper_mod();
   translate([-12.9,-8.25 - 5.9,-9.1]) rotate([-90,0,0]) right_lower_mod();
 }
-
-y_rail_mount_left();

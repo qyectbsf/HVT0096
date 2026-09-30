@@ -124,13 +124,13 @@ lower_belt_idler_z = lower_belt_z -3;
 upper_belt_split_lengths =
   [80 + current_x_position,
    80 + current_y_position,
-   530,
+   530 -190,
    43,
-   171,
+   171 + 20,
    38,
    38,
-   248,
-   452 - current_y_position,
+   248 ,
+   452 - current_y_position -120,
    408 - current_x_position];
 
 upper_belt_rotations =
@@ -365,7 +365,7 @@ module z_ball_screw_shaft_cutout_upper()
 module xy_motor_shaft_cutout()
 {
   rotate_extrude($fn = resolution)
-    polygon(points=[[0.0, -1.0], [23 / 2, -1.0], [23 / 2, 1.5],
+    polygon(points=[[0.0, -1.1], [23 / 2, -1.1], [23 / 2, 1.5],
                     [17 / 2, 1.5], [17/2, 20.9], [13 / 2, 20.9],
                     [13 / 2, 25], [6 / 2, 25], [6 / 2, 26],
                     [0, 26]]);
