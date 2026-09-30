@@ -54,7 +54,7 @@ lower_belt_split_lengths =
    38,
    170,
    43,
-   530,
+   530 -190,
    80 + current_y_position,
    408 - current_x_position];
 
@@ -84,13 +84,13 @@ lower_belt_idler_x_coordinates =
 
 lower_belt_idler_y_coordinates =
   [-110 + current_y_position,
-   motor_abs_offset_y,
-   motor_abs_offset_y + belt_distance + belt_thickness,
-   motor_abs_offset_y + belt_distance + belt_thickness + belt_tention_strength,
-   motor_abs_offset_y + belt_distance + belt_thickness,
-   motor_abs_offset_y,
-   300,
-   -230,
+   motor_abs_offset_y -150,
+   motor_abs_offset_y + belt_distance + belt_thickness -150,
+   motor_abs_offset_y + belt_distance + belt_thickness + belt_tention_strength -150,
+   motor_abs_offset_y + belt_distance + belt_thickness -150,
+   motor_abs_offset_y -150,
+   300 -150,
+   -190,
    -150 + current_y_position,
    -150 + current_y_position];
 
@@ -158,15 +158,15 @@ upper_belt_idler_x_coordinates =
    -180 + current_x_position];
 
 upper_belt_idler_y_coordinates =
-  [-150 + current_y_position,
-   -230,
-   300,
-   motor_abs_offset_y,
-   motor_abs_offset_y + belt_distance + belt_thickness,
-   motor_abs_offset_y + belt_distance + belt_thickness + belt_tention_strength,
-   motor_abs_offset_y + belt_distance + belt_thickness,
-   motor_abs_offset_y,
-   -110 + current_y_position,
+  [-122.5 + current_y_position,
+   -230 + 40,
+   300 - 150,
+   motor_abs_offset_y -150,
+   motor_abs_offset_y + belt_distance + belt_thickness -150,
+   motor_abs_offset_y + belt_distance + belt_thickness + belt_tention_strength -150,
+   motor_abs_offset_y + belt_distance + belt_thickness - 150,
+   motor_abs_offset_y -150,
+   -110 + current_y_position - 30,
    -110 + current_y_position];
 
 upper_belt_x_coordinates =
@@ -191,9 +191,9 @@ upper_belt_y_coordinates =
    upper_belt_idler_y_coordinates[6] - ( belt_distance + belt_thickness ) / 2,
    upper_belt_idler_y_coordinates[7] + ( belt_distance + belt_thickness ) / 2,
    upper_belt_idler_y_coordinates[8],
-   upper_belt_idler_y_coordinates[9] - ( belt_distance + belt_thickness ) / 2,];
+   upper_belt_idler_y_coordinates[9] - ( belt_distance + belt_thickness ) / 2 - 29.5,];
 
-upper_belt_z = 30;
+upper_belt_z = 34.5;
 upper_belt_idler_z = upper_belt_z -3;
 
 printed_wall_width = 6.5;
