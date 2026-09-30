@@ -27,25 +27,25 @@ module xy_structure()
 
       if ( show_xy_front_left == 1)
         {
-          translate([-225.0, -260.0, 0.0]) union()
+          translate([-225.0, -220.0, 0.0]) union()
             {
               block_front_left();
-              block_front_left_addatives();
+              // block_front_left_addatives();
             }
         }
 
       if ( show_xy_front_right == 1)
         {
-          translate([ 225.0, -260.0, 0.0]) union()
+          translate([ 225.0, -220.0, 0.0]) union()
             {
               block_front_right();
-              block_front_right_addatives();
+              // block_front_right_addatives();
             }
         }
 
       if ( show_xy_back_left == 1)
         {
-          translate([-225,370,0]) union()
+          translate([-225,220,0]) union()
             {
               block_back_left();
               block_back_left_addatives();
@@ -54,7 +54,7 @@ module xy_structure()
 
       if ( show_xy_back_right == 1)
         {
-          translate([225,370,0]) union()
+          translate([225,220,0]) union()
             {
               block_back_right();
               block_back_right_addatives();
@@ -86,6 +86,20 @@ module xy_structure()
             }
         }
 
-      //translate([0, current_y_position, 0]) y_movement();
+      if ( show_x_rail == 1)
+        {
+          translate([0,205,500])
+            x_rail();
+        }
+
+      if ( show_y_rail == 1)
+        {
+          for (i = [-1,1]){
+            translate([i * (205 + 14 + 6),-200,0])
+              y_rail();
+          }
+        }
+
+      translate([0, current_y_position, 0]) y_movement();
     }
 }

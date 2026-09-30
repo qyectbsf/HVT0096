@@ -6,22 +6,24 @@ module y_movement()
 
   // 20x20 alu profile
 
-  //translate([0, -130, 28]) cube([420,20,20], center = true);
+  translate([0, -130, 29.2]) cube([420,20,20], center = true);
 
   /* translate([0,- 152.15 + 65,19.2]) x_schiene(0); */
 
   for ( i = [1,-1] ) translate([(30/2 + 420/2)*i, -130 - 44.4 / 2, 0]) mgn_12_h();
 
+  // y rail mount blocks
   for ( i = [1,-1] )
     {
-      translate([i * 211.5, -130, 13])
+      translate([i * 225, -130, 13])
         rotate([0,0,i * 90])
+        rotate([0,0,90])
         y_rail_mount();
 
-      y_rail_mount_addatives();
+      // y_rail_mount_addatives();
     }
 
-  translate([current_x_position, 0,0]) x_movement();
+  // translate([current_x_position, 0,0]) x_movement();
 }
 
 module x_movement()
@@ -33,84 +35,73 @@ module x_movement()
   //translate([-150,- 152.14 + 65, 26.2 + 13 - 52]) carriage_e3d();
 }
 
-module y_rail_mount()
-{
-  // first
-  difference()
-    {
-      y_rail_mount_base();
-      // rail mount
-      for ( x = [-1, 1] )
-        {
-          for ( y = [-1, 1] )
-            {
-              translate([x * 20 / 2,y * 20 / 2 - 10 - 3.5,- 0.1]) cylinder(h = 5 + 0.2, d = m3_screw_loose, $fn = resolution);
-              translate([x * 20 / 2,y * 20 / 2 - 10 - 3.5,5]) cylinder(h = 10 + 0.2, d = m3_screw_head, $fn = resolution);
-            }
-        }
-      // combiner
-      for ( y = [-3.5, -13.5, -23.5] )
-        {
-          translate([0, y,- 0.1]) cylinder(h = 15 + 0.2, d = m3_screw_tight, $fn = resolution);
-        }
+module y_rail_mount() {
+  difference() {
+    union() {
+      translate([-13.1,-28.3 / 2,0])
+        cube([52, 28.3, 36]);
+      translate([13.5,-28.3 / 2,-10])
+        cube([25.4, 28.3, 10]);
     }
+    translate([13.50,-10,6.20])
+      cube([40,20,20]);
 
-  // second
-  difference()
-    {
-      translate([0,0,30]) rotate([0,180,0]) y_rail_mount_base();
-      // combiner
-      for ( y = [-3.5, -13.5, -23.5] )
-        {
-          translate([0, y,15 - 0.1]) cylinder(h = 5 + 0.2, d = m3_screw_tight, $fn = resolution);
-          translate([0, y,20 - 0.1]) cylinder(h = 10 + 0.2, d = m3_screw_head, $fn = resolution);
-        }
-    }
-}
 
-module y_rail_mount_base()
-{
-  length = 60;
-
-  difference()
-    {
-      union()
+    translate([29.5,-28.3 / 2,-13.5])
+      minkowski()
       {
-        translate([-length / 2, -27,0]) cube([length, 27, 5]);
-        translate([-26 / 2, 0, 0]) cube([26, 27, 5]);
-
-        translate([-20 / 2, -27, 5]) cube([20, 27, 10]);
-        translate([10 , -27, 5]) cube([20, 27, 10]);
-        translate([10 , 0, 5]) cube([3, 27, 10]);
-        translate([-13 , 0, 5]) cube([3, 27, 2]);
-        translate([-30 , -27, 5]) cube([20, 27, 1]);
+        cube([20, 28.3, 10]);
+        sphere(d = 7 , $fn = resolution);
       }
-      translate([10  , -27 - 0.1, 14]) cube([20.1, 20.1, 2.1]);
-      translate([20,-16.5,2]) cylinder(h = 15, d = 5mm_stab ,$fn = resolution);
-
-      translate([-30 -0.1  , -27 - 0.1, 4]) cube([20.1, 20.1, 2.1]);
-      translate([-20,-16.5,2]) cylinder(h = 10, d = 5mm_stab ,$fn = resolution);
-
-      // alu profile mount
-      for ( z = [0,23] )
-        {
-          for ( y = [10,20] )
-            {
-              translate([0,y,z - 0.1]) cylinder(h = 5 + 0.2, d = m5_screw_tight, $fn = resolution);
-            }
-        }
+    for (i = [20.1, 32.9]) {
+      translate([i,0,-20])
+        cylinder(r = 2.6, h = 60, $fn = resolution);
     }
-  difference()
-    {
-      translate([-20,-16.5,4]) cylinder(h = 1, d1 = 9, d2 = 6,$fn = resolution);
-      translate([-20,-16.5,4 - 0.1]) cylinder(h = 1.2, d = 5mm_stab,$fn = resolution);
+    for (i = [-1, 1]) {
+      translate([13.4, 8 * i, -5])
+        rotate([0,90,0])
+        cylinder(r = 3.1754, h = 2.5, $fn = 6);
+      translate([15.8, 8 * i, -5])
+        rotate([0,90,0])
+        cylinder(r = 1.6, h = 10.3, $fn = resolution);
+      translate([26, 8 * i, -5])
+        rotate([0,90,0])
+        cylinder(r = 3.5, h = 10.3, $fn = resolution);
     }
 
-  difference()
-    {
-      translate([20,-16.5,14]) cylinder(h = 1, d1 = 9, d2 = 6,$fn = resolution);
-      translate([20,-16.5,14 - 0.1]) cylinder(h = 1.2, d = 5mm_stab,$fn = resolution);
+    translate([-3,-8,lower_belt_z - 15]) idler_cutout_wip();
+    translate([-3,8,upper_belt_z - 15]) idler_cutout_wip();
+
+    translate([-3,-8,-0.1]) cylinder(h = 50, d = 3.1, $fn = resolution);
+    translate([-3,8,-0.1]) cylinder(h = 50, d = 3.1, $fn = resolution);
+
+    translate([-13.2 + 27,14.15 - 1.9 - 0.15,upper_belt_z -15 + 5])
+      cube([54,4.3,8], center = true);
+    translate([-13.2,0,upper_belt_z -15 + 5])
+      cube([10,28.4,11.1], center = true);
+
+    translate([-13.2 + 27,-14.15 + 1.9 + 0.15,lower_belt_z -15 + 5])
+      cube([54,4.3,8], center = true);
+    translate([-13.2,0,lower_belt_z -15 + 5])
+      cube([10,28.4,11.1], center = true);
+
+    for (i = [-1,1]) {
+      translate([10,7.5 * i,-0.1])
+      cylinder(h = 40, r = 1.6, $fn = resolution);
     }
+    for (i = [-1,1]) {
+      translate([-10,7.5 * i,-0.1])
+        cylinder(h = 10, r = 1.6, $fn = resolution);
+    }
+    for (i = [-1,1]) {
+      hull() {
+      translate([-10,7.5 * i,4.0])
+        cylinder(h = 10, r = 3, $fn = resolution);
+      translate([-15,7.5 * i,4.0])
+        cylinder(h = 50, r = 3, $fn = resolution);
+      }
+    }
+  }
 }
 
 module y_rail_mount_addatives()

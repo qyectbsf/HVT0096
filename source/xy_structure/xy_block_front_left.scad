@@ -7,18 +7,18 @@ module block_front_left()
       union()
       {
         block_front_left_primary();
-        block_front_left_secondary();
+        //        block_front_left_secondary();
       }
 
       // combiner
-      for ( z = [lower_belt_z - 6 - 10, upper_belt_z + 6 + 6 + 10] )
-        {
-          translate([-15,40,z]) rotate([0,-90,0]) union()
-            {
-              cylinder(h = 10, d = m3_screw_tight, $fn = resolution);
-              translate([0,0,10]) cylinder(h = 50, d = m3_screw_head, $fn = resolution);
-            }
-        }
+      // for ( z = [lower_belt_z - 6 - 10, upper_belt_z + 6 + 6 + 10] )
+      //   {
+      //     translate([-15,40,z]) rotate([0,-90,0]) union()
+      //       {
+      //         cylinder(h = 10, d = m3_screw_tight, $fn = resolution);
+      //         translate([0,0,10]) cylinder(h = 50, d = m3_screw_head, $fn = resolution);
+      //       }
+      //   }
     }
 }
 
