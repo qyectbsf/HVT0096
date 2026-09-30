@@ -1,6 +1,6 @@
-resolution = 20.0;
+resolution = 10.0;
 
-show_belts = 1;
+show_belts = 0;
 show_frame = 1;
 
 show_z_struct = 1;
@@ -10,14 +10,17 @@ show_z_back = 1;
 
 show_xy_struct = 1;
 show_xy_back_left = 1;
-show_xy_back_right = 1;
+show_xy_back_right = 0;
 show_xy_front_left = 1;
 show_xy_front_right = 1;
-show_xy_left = 1;
-show_xy_right = 1;
-show_xy_back = 1;
+show_xy_left = 0;
+show_xy_right = 0;
+show_xy_back = 0;
 
-show_bed = 1;
+show_x_rail = 0;
+show_y_rail = 1;
+
+show_bed = 0;
 show_bed_left = 1;
 show_bed_right = 1;
 show_bed_back = 1;
@@ -26,7 +29,7 @@ show_bed_angle_marker = 0;
 show_addatives = 1;
 
 current_x_position = 0.0;
-current_y_position = 0.0;
+current_y_position = 0.0; // [-25.8, 342.0]
 current_z_position = -13.0 + 0.0;
 
 belt_thickness = 1.5;
