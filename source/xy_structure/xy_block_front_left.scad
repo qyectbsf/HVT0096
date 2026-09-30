@@ -30,34 +30,36 @@ module block_front_left_primary()
       union()
       {
         translate([-15 - 6.5, -15.0, -30.0]) cube([6.5, 65.0, 100.0]);
-        translate([-16.5, 35.0 / 2 + 15, 35.0]) cube([10, 35.0, 70.0], center = true);
         translate([-15, 15, 10.0]) cube([30.0, 6.0, 60.0]);
+        translate([-15, 15, 0.0]) cube([30.0, 3.0, 10.1]);
 
-        for (z = [10.0, 63.0])
+        translate([-18.0, 22.50, 63.0]) hull()
           {
-            translate([-18.0, 22.50, z]) hull()
-              {
-                translate([3.0, -2.5, 0.0]) cube([30.0, 6.0, 7.0]);
-                translate([0.0, 12.5, 3.5]) cube([6.0, 30.0, 7.0], center = true);
-              }
+            translate([3.0, -2.5, 0.0]) cube([30.0, 6.0, 7.0]);
+            translate([0.0, 12.5, 3.5]) cube([6.0, 30.0, 7.0], center = true);
           }
+
+        translate([-15.0, 20.0, 14.0]) cube([30.0, 30.0, 7.0]);
       }
       // space for idler
-      translate([-16.5, 30, upper_belt_idler_z]) idler_cutout(21);
+      translate([-18.5, 30, upper_belt_idler_z]) idler_cutout(21);
 
       // space for 5mm stab
-      translate([-16.5,30,40]) cylinder(h =70.0, d = 5mm_stab, $fn = resolution, center = true);
+      translate([-18.5,30,40])
+        cylinder(h =70.0, d = 3mm_stab, $fn = resolution, center = true);
 
       // m6 mount hole for frame connectivity
       translate([0, 15 + 3, 40.0])
         rotate([90.0, 0.0, 0.0])
         cylinder(h = 6.2, d = m6_screw, center = true, $fn = resolution);
+
       for (i = [-15.0, 20.0, 55.0])
         {
           translate([-18.0, 0, i])
             rotate([0.0, 90.0, 0.0])
             cylinder(h = 8.2, d = m6_screw, center = true, $fn = resolution);
         }
+
       translate([-18, 30, -15.0])
         rotate([0.0, 90.0 ,0.0])
         cylinder(h = 10, d = m6_screw, center = true, $fn = resolution);
