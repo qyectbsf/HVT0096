@@ -1,5 +1,6 @@
 include <MCAD/stepper.scad>
 include <MCAD/2Dshapes.scad>
+include <nopSCADlib/lib.scad>
 include <global_vars.scad>
 
 include <xy_structure/main.scad>
@@ -14,8 +15,8 @@ module main()
 {
   frame();
 
-  // translate([0, 110,0])
-  //   z_structure();
+  translate([0, 110,0])
+    z_structure();
 
   translate([0, 110, -46.8348 - 0.05])
     bed();

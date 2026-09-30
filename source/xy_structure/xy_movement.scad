@@ -1,16 +1,20 @@
+include <nopSCADlib/lib.scad>
+
 include <../global_vars.scad>
 include <../stl_files/main.scad>
 
 module y_movement()
 {
-
   // 20x20 alu profile
-
-  translate([0, -130, 29.2]) cube([420,20,20], center = true);
+  translate([0, -130, 29.2]) rotate([0,90,0]) extrusion(E2020, 420, cornerHole = true);
 
   /* translate([0,- 152.15 + 65,19.2]) x_schiene(0); */
 
-  for ( i = [1,-1] ) translate([(30/2 + 420/2)*i, -130 - 44.4 / 2, 0]) mgn_12_h();
+  for ( i = [1,-1] ) {
+    translate([(30/2 + 420/2)*i, -130 , 0])
+      rotate([0,0,90])
+      carriage(MGN12C_carriage);
+  }
 
   // y rail mount blocks
   for ( i = [1,-1] )
@@ -20,7 +24,7 @@ module y_movement()
         rotate([0,0,90])
         y_rail_mount();
 
-      // y_rail_mount_addatives();
+      y_rail_mount_addatives();
     }
 
   // translate([current_x_position, 0,0]) x_movement();
@@ -106,14 +110,16 @@ module y_rail_mount() {
 
 module y_rail_mount_addatives()
 {
-  for ( i = [-1,1] )
-    {
-      translate([i * 228, -130 + i * -20, lower_belt_z - 2])
-        rotate([90,0,0])
-        gates_2gt_20t_smooth_idler();
+  if (show_y_rail_addatives == 1) {
+    for ( i = [-1,1] )
+      {
+        translate([i * 228, -130 + i * -20, lower_belt_z - 2])
+          rotate([90,0,0])
+          pulley(GT2x20_toothed_idler);
 
-      translate([i * 228,  -130 + i * 20, upper_belt_z -2])
-        rotate([90,0,0])
-        gates_2gt_20t_toothed_idler();
-    }
+        translate([i * 228,  -130 + i * 20, upper_belt_z -2])
+          rotate([90,0,0])
+          pulley(GT2x20_toothed_idler);
+      }
+  }
 }

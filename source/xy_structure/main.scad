@@ -23,14 +23,14 @@ module xy_structure()
 
   if ( show_xy_struct == 1 )
     {
-      //for ( i = [-1,1] ) translate([225 * i, -225, 0]) y_rail();
+      // for ( i = [-1,1] ) translate([225 * i, -225, 0]) y_rail();
 
       if ( show_xy_front_left == 1)
         {
           translate([-225.0, -220.0, 0.0]) union()
             {
               block_front_left();
-              // block_front_left_addatives();
+              block_front_left_addatives();
             }
         }
 
@@ -88,18 +88,24 @@ module xy_structure()
 
       if ( show_x_rail == 1)
         {
-          translate([0,205,500])
-            x_rail();
-        }
-
-      if ( show_y_rail == 1)
-        {
           for (i = [-1,1]){
-            translate([i * (205 + 14 + 6),-200,0])
-              y_rail();
+            translate([i * (205 + 14 + 6), 0, 0])
+              rotate([0,0,90])
+              rail(MGN12, 400);
           }
         }
 
-      translate([0, current_y_position, 0]) y_movement();
+
+      if ( show_y_struct == 1)
+        {
+          translate([0, current_y_position, 0]) y_movement();
+
+          if ( show_y_rail == 1)
+            {
+              translate([0,205,500])
+                x_rail();
+            }
+
+        }
     }
 }
