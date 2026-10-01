@@ -8,28 +8,6 @@ module block_front_left()
 {
   difference()
     {
-      union()
-      {
-        block_front_left_primary();
-        //        block_front_left_secondary();
-      }
-
-      // combiner
-      // for ( z = [lower_belt_z - 6 - 10, upper_belt_z + 6 + 6 + 10] )
-      //   {
-      //     translate([-15,40,z]) rotate([0,-90,0]) union()
-      //       {
-      //         cylinder(h = 10, d = m3_screw_tight, $fn = resolution);
-      //         translate([0,0,10]) cylinder(h = 50, d = m3_screw_head, $fn = resolution);
-      //       }
-      //   }
-    }
-}
-
-module block_front_left_primary()
-{
-  difference()
-    {
       // main structure to subtract from
       union()
       {
@@ -48,7 +26,7 @@ module block_front_left_primary()
       // space for idler
       translate([-18.5, 30, upper_belt_idler_z]) idler_cutout(21);
 
-      // space for 5mm stab
+      // space for 3mm stab
       translate([-18.5,30,40])
         cylinder(h =70.0, d = 3mm_stab, $fn = resolution, center = true);
 
@@ -70,30 +48,17 @@ module block_front_left_primary()
     }
 }
 
-module block_front_left_secondary()
-{
-  translate([0,20,0]) union()
-    {
-      rotate([90,0,0])
-        linear_extrude(height = 5, convexity = 10)
-        polygon(points = [[-21.5,-8.715], [-55,lower_belt_z], [-55,upper_belt_z + 6],
-                          [-21.5,68.55]]);
-
-      translate([0,30,0])
-        rotate([90,0,0])
-        linear_extrude(height = 30, convexity = 10)
-        polygon(points = [[-21.5,-8.715], [-55,lower_belt_z], [-55,upper_belt_z + 6],
-                          [-21.5,68.55], [-21.5, upper_belt_z + 6 + 6], [-35,upper_belt_z + 6 + 6],
-                          [-35,lower_belt_z - 6], [-21.5,lower_belt_z - 6]]);
-    }
-}
-
 module block_front_left_addatives()
 {
   if ( show_xy_front_left_addatives == 1 )
     {
       // idler
-      translate([-16.5, 30, upper_belt_z - 2 + 0.75]) rotate([0,0,0]) pulley(GT2x20_toothed_idler);
+      translate([-18.5, 30, upper_belt_z - 2 + 0.75]) rotate([0,0,0]) pulley(GT2x20_toothed_idler);
+
+      // 3mm stab
+      translate([-18.5,30,40])
+        cylinder(h =70.0, d = 3mm_stab, $fn = resolution, center = true);
+
 
       // m6 screw
       translate([0, 15 + 3 -1 + 1.6, 40.0])
