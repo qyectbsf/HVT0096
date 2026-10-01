@@ -126,34 +126,34 @@ module block_back_addatives()
 {
   if ( show_addatives == 1 )
     {
-      for ( x = [4, 5, 6] )
+      for ( i = [4, 5, 6] )
         {
-          if ( x == 5 )
+          if ( i == 5 )
             {
-              translate([upper_belt_idler_x_coordinates[x],
-                         motor_rel_offset_y + belt_distance + belt_thickness + belt_tention_strength,
-                         upper_belt_z - 2]) rotate([90,0,0]) gates_2gt_20t_smooth_idler();
+              translate([upper_belt_idler_x_coordinates[i],
+                         upper_belt_idler_y_coordinates[i] + belt_tention_strength,
+                         upper_belt_z - 2]) rotate([0,0,0]) pulley(GT2x20_toothed_idler);
             } else
             {
-              translate([upper_belt_idler_x_coordinates[x],
-                         motor_rel_offset_y + belt_distance + belt_thickness,
-                         upper_belt_z - 2]) rotate([90,0,0]) gates_2gt_20t_smooth_idler();
+              translate([upper_belt_idler_x_coordinates[i],
+                         upper_belt_idler_y_coordinates[i],
+                         upper_belt_z - 2]) rotate([0,0,0]) pulley(GT2x20_plain_idler);
             }
         }
 
-      for ( x = [2, 3, 4] )
+      for ( i = [2, 3, 4] )
         {
-          if (x == 3)
+          if (i == 3)
             {
-              translate([lower_belt_idler_x_coordinates[x],
-                         motor_rel_offset_y + belt_distance + belt_thickness + belt_tention_strength,
-                         lower_belt_z - 2]) rotate([90,0,0]) gates_2gt_20t_smooth_idler();
+              translate([lower_belt_idler_x_coordinates[i],
+                         lower_belt_idler_y_coordinates[i] + belt_tention_strength,
+                         lower_belt_z - 2]) rotate([0,0,0]) pulley(GT2x20_toothed_idler);
 
             } else
             {
-              translate([lower_belt_idler_x_coordinates[x],
-                         motor_rel_offset_y + belt_distance + belt_thickness,
-                         lower_belt_z - 2]) rotate([90,0,0]) gates_2gt_20t_smooth_idler();
+              translate([lower_belt_idler_x_coordinates[i],
+                         lower_belt_idler_y_coordinates[i],
+                         lower_belt_z - 2]) rotate([0,0,0]) pulley(GT2x20_plain_idler);
             }
         }
     }

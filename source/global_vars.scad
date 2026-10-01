@@ -1,20 +1,20 @@
 resolution = 10.0;
 
-show_belts = 0;
+show_belts = 1;
 show_frame = 1;
 show_screws = 0;
 
-show_z_struct = 0;
-show_z_left = 1;
-show_z_right = 1;
-show_z_back = 1;
+show_z_struct = 1;
+show_z_left = 0;
+show_z_right = 0;
+show_z_back = 0;
 
 
 
 show_xy_struct = 1;
 
-show_xy_back_left = 0;
-show_xy_back_left_addatives = 0;
+show_xy_back_left = 1;
+show_xy_back_left_addatives = 1;
 
 show_xy_back_right = 0;
 show_xy_back_right_addatives = 0;
@@ -31,8 +31,8 @@ show_xy_left_addatives = 0;
 show_xy_right = 0;
 show_xy_right_addatives = 0;
 
-show_xy_back = 0;
-show_xy_back_addatives = 0;
+show_xy_back = 1;
+show_xy_back_addatives = 1;
 
 show_x_rail = 0;
 show_x_rail_addatives = 0;
@@ -45,23 +45,22 @@ show_y_rail = 1;
 show_y_rail_addatives = 1;
 
 show_bed = 0;
-show_bed_left = 1;
-show_bed_right = 1;
-show_bed_back = 1;
+show_bed_left = 0;
+show_bed_right = 0;
+show_bed_back = 0;
 
 show_bed_angle_marker = 0;
 show_addatives = 1;
 
-current_x_position = 0.0;
-current_y_position = 0.0; // [-25.8, 342.0]
-current_z_position = -13.0 + 0.0;
+current_x_position = 300.0;
+current_y_position = -25.0; // [-25.8, 342.0]
+current_z_position = -13.0 + 0.0 + 100;
 
 belt_thickness = 1.5;
 belt_height = 6.0;
 belt_distance = 12;
 
-// 0 to 14.5
-belt_tention_strength = 0;
+belt_tention_strength = 0; // [0, 14.5]
 
 frame_back_left_x = -225;
 frame_back_left_y = 370;
@@ -72,153 +71,64 @@ motor_abs_offset_y = 342.0;
 motor_rel_offset_x = motor_abs_offset_x - frame_back_left_x;
 motor_rel_offset_y = motor_abs_offset_y - frame_back_left_y;
 
-
-lower_belt_split_lengths =
-  [80 + current_x_position,
-   452 - current_y_position,
-   248,
-   38,
-   38,
-   170,
-   43,
-   530 -190,
-   80 + current_y_position,
-   408 - current_x_position];
-
-lower_belt_rotations =
-  [90,
-   180,
-   90,
-   110,
-   70,
-   90,
-   323.8,
-   0,
-   180,
-   270];
+// lower belt
+lower_belt_start_position_x = current_x_position - 150 + 20;
+lower_belt_start_position_y = current_y_position - 131 - 15;
+lower_belt_end_position_x   = current_x_position - 150 - 20;
+lower_belt_end_position_y   = current_y_position - 131 + 15;
 
 lower_belt_idler_x_coordinates =
-  [-228,
-   -228,
-   31/2 + 2.5,
-   31/2 + 2.5 + 31 * 1,
-   31/2 + 2.5 + 31 * 2,
-   -motor_abs_offset_x,
-   +245 + belt_distance + belt_thickness - 3,
-   241.5,
-   228,
-   -180 + current_x_position];
+  [- 228.00,
+   - 228.00,
+   +  18.00,
+   +  49.00,
+   +  80.00,
+   + 271.00,
+   + 255.48,
+   + 243.45,
+   + 231.40];
 
 lower_belt_idler_y_coordinates =
-  [-110 + current_y_position - 28,
-   motor_abs_offset_y -150,
-   motor_abs_offset_y + belt_distance + belt_thickness -150,
-   motor_abs_offset_y + belt_distance + belt_thickness + belt_tention_strength -150,
-   motor_abs_offset_y + belt_distance + belt_thickness -150,
-   motor_abs_offset_y -150,
-   300 -150,
-   -190,
-   -150 + current_y_position,
-   -150 + current_y_position];
-
-lower_belt_x_coordinates =
-  [lower_belt_idler_x_coordinates[0] + 80 + current_x_position,
-   lower_belt_idler_x_coordinates[1] - ( belt_distance + belt_thickness ) / 2,
-   lower_belt_idler_x_coordinates[2],
-   lower_belt_idler_x_coordinates[3],
-   lower_belt_idler_x_coordinates[4],
-   lower_belt_idler_x_coordinates[5],
-   lower_belt_idler_x_coordinates[6] - ( belt_distance + belt_thickness ) / 2.9,
-   lower_belt_idler_x_coordinates[7] + ( belt_distance + belt_thickness ) / 2,
-   lower_belt_idler_x_coordinates[8] + ( belt_distance + belt_thickness ) / 2,
-   lower_belt_idler_x_coordinates[9],];
-
-lower_belt_y_coordinates =
-  [lower_belt_idler_y_coordinates[0] - ( belt_distance + belt_thickness ) / 2,
-   lower_belt_idler_y_coordinates[1],
-   lower_belt_idler_y_coordinates[2] - ( belt_distance + belt_thickness ) / 2,
-   lower_belt_idler_y_coordinates[3] + ( belt_distance + belt_thickness ) / 2,
-   lower_belt_idler_y_coordinates[4] - ( belt_distance + belt_thickness ) / 2,
-   lower_belt_idler_y_coordinates[5] + ( belt_distance + belt_thickness ) / 2,
-   lower_belt_idler_y_coordinates[6] + ( belt_distance + belt_thickness ) / 2.9,
-   lower_belt_idler_y_coordinates[7],
-   lower_belt_idler_y_coordinates[8],
-   lower_belt_idler_y_coordinates[9] + ( belt_distance + belt_thickness ) / 2];
+  [- 140.00 + current_y_position,
+   + 192.00,
+   + 204.05,
+   + 204.05 + belt_tention_strength,
+   + 204.05,
+   + 192.00,
+   + 176.48,
+   - 190.00,
+   - 122.00 + current_y_position];
 
 lower_belt_z = 23.5;
 lower_belt_idler_z = lower_belt_z -2.5;
 
-upper_belt_split_lengths =
-  [80 + current_x_position,
-   80 + current_y_position,
-   530 -190,
-   43,
-   171 + 20,
-   38,
-   38,
-   248 ,
-   452 - current_y_position -120,
-   408 - current_x_position];
-
-upper_belt_rotations =
-  [270,
-   0,
-   180,
-   180 + 37.2,
-   90,
-   110,
-   70,
-   90,
-   0,
-   270];
+// upper belt
+upper_belt_start_position_x = current_x_position - 150 + 20;
+upper_belt_start_position_y = current_y_position - 131 + 15;
+upper_belt_end_position_x   = current_x_position - 150 - 20;
+upper_belt_end_position_y   = current_y_position - 131 - 15;
 
 upper_belt_idler_x_coordinates =
-  [-228,
-   -241.5,
-   -241.5 - belt_distance - belt_thickness,
-   motor_abs_offset_x,
-   -(31/2 + 2.5 + 31 * 2),
-   -(31/2 + 2.5 + 31 * 1),
-   -(31/2 + 2.5),
-   228,
-   228,
-   -180 + current_x_position];
+  [- 231.40,
+   - 243.45,
+   - 255.48,
+   - 271.00,
+   -  80.00,
+   -  49.00,
+   -  18.00,
+   + 228.00,
+   + 228.00];
 
 upper_belt_idler_y_coordinates =
-  [-123.0 + current_y_position,
-   -230 + 40,
-   300 - 150,
-   motor_abs_offset_y -150,
-   motor_abs_offset_y + belt_distance + belt_thickness -150,
-   motor_abs_offset_y + belt_distance + belt_thickness + belt_tention_strength -150,
-   motor_abs_offset_y + belt_distance + belt_thickness - 150,
-   motor_abs_offset_y -150,
-   -110 + current_y_position - 30,
-   -110 + current_y_position];
-
-upper_belt_x_coordinates =
-  [upper_belt_idler_x_coordinates[0],
-   upper_belt_idler_x_coordinates[1] + ( belt_distance + belt_thickness ) / 2,
-   upper_belt_idler_x_coordinates[2] + ( belt_distance + belt_thickness ) / 2,
-   upper_belt_idler_x_coordinates[3] - ( belt_distance + belt_thickness ) / 2.9,
-   upper_belt_idler_x_coordinates[4],
-   upper_belt_idler_x_coordinates[5],
-   upper_belt_idler_x_coordinates[6],
-   upper_belt_idler_x_coordinates[7],
-   upper_belt_idler_x_coordinates[8] + ( belt_distance + belt_thickness ) / 2,
-   upper_belt_idler_x_coordinates[9]];
-
-upper_belt_y_coordinates =
-  [upper_belt_idler_y_coordinates[0] + ( belt_distance + belt_thickness ) / 2,
-   upper_belt_idler_y_coordinates[1],
-   upper_belt_idler_y_coordinates[2],
-   upper_belt_idler_y_coordinates[3] - ( belt_distance + belt_thickness ) / 2.9,
-   upper_belt_idler_y_coordinates[4] - ( belt_distance + belt_thickness ) / 2,
-   upper_belt_idler_y_coordinates[5] + ( belt_distance + belt_thickness ) / 2,
-   upper_belt_idler_y_coordinates[6] - ( belt_distance + belt_thickness ) / 2,
-   upper_belt_idler_y_coordinates[7] + ( belt_distance + belt_thickness ) / 2,
-   upper_belt_idler_y_coordinates[8],
-   upper_belt_idler_y_coordinates[9] - ( belt_distance + belt_thickness ) / 2 - 29.5,];
+  [- 122.00 + current_y_position,
+   - 190.00,
+   + 176.48,
+   + 192.00,
+   + 204.05,
+   + 204.05 + belt_tention_strength,
+   + 204.05,
+   + 192.00,
+   - 140.00 + current_y_position];
 
 upper_belt_z = 34.5;
 upper_belt_idler_z = upper_belt_z -2.5;

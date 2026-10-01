@@ -1,53 +1,44 @@
-include <../global_vars.scad>
-include <../stl_files/main.scad>
+pulley_r = 6;
 
-module belt_gear()
-{
-  difference()
-    {
-      cylinder(h = belt_height, d = 15, $fn = resolution);
-      translate([0,0,-0.1]) cylinder(h = belt_height + 0.2, d = 12, $fn = resolution);
-    }
-}
+// Define the radius for each idler individually.
+// Use positive (6) for one side, negative (-6) for the opposite side.
+lower_belt_radii = [+6.05, +6.05, -6.05, +6.05, -6.05, +6.05, -6.05, +6.05, -6.05];
+upper_belt_radii = [-6.05, +6.05, -6.05, +6.00, -6.05, +6.05, -6.05, +6.05, +6.05];
 
 module lower_belt()
 {
-  // lines
-  for ( i = [0:9] )
-    {
-      translate([lower_belt_x_coordinates[i], lower_belt_y_coordinates[i], 0])
-        rotate([0,0,lower_belt_rotations[i]])
-        translate([-belt_thickness / 2,0,0])
-        cube([belt_thickness, lower_belt_split_lengths[i], belt_height]);
-    }
+  lower_belt_points= [
+           [lower_belt_start_position_x, lower_belt_start_position_y, 0],
+           [lower_belt_idler_x_coordinates[0], lower_belt_idler_y_coordinates[0], lower_belt_radii[0]],
+           [lower_belt_idler_x_coordinates[1], lower_belt_idler_y_coordinates[1], lower_belt_radii[1]],
+           [lower_belt_idler_x_coordinates[2], lower_belt_idler_y_coordinates[2], lower_belt_radii[2]],
+           [lower_belt_idler_x_coordinates[3], lower_belt_idler_y_coordinates[3], lower_belt_radii[3]],
+           [lower_belt_idler_x_coordinates[4], lower_belt_idler_y_coordinates[4], lower_belt_radii[4]],
+           [lower_belt_idler_x_coordinates[5], lower_belt_idler_y_coordinates[5], lower_belt_radii[5]],
+           [lower_belt_idler_x_coordinates[6], lower_belt_idler_y_coordinates[6], lower_belt_radii[6]],
+           [lower_belt_idler_x_coordinates[7], lower_belt_idler_y_coordinates[7], lower_belt_radii[7]],
+           [lower_belt_idler_x_coordinates[8], lower_belt_idler_y_coordinates[8], lower_belt_radii[8]],
+           [lower_belt_end_position_x, lower_belt_end_position_y, 0]
+           ];
 
-  // gear
-  for ( i = [0:8] )
-    {
-      translate([lower_belt_idler_x_coordinates[i],
-                 lower_belt_idler_y_coordinates[i],
-                 0])
-        belt_gear();
-    }
+  belt(GT2x6, lower_belt_points, open=true);
 }
 
 module upper_belt()
 {
-  // lines
-  for ( i = [0:9] )
-    {
-      translate([upper_belt_x_coordinates[i], upper_belt_y_coordinates[i], 0])
-        rotate([0,0,upper_belt_rotations[i]])
-        translate([-belt_thickness / 2,0,0])
-        cube([belt_thickness, upper_belt_split_lengths[i], belt_height]);
-    }
+  upper_belt_points= [
+           [upper_belt_start_position_x, upper_belt_start_position_y, 0],
+           [upper_belt_idler_x_coordinates[0], upper_belt_idler_y_coordinates[0], upper_belt_radii[0]],
+           [upper_belt_idler_x_coordinates[1], upper_belt_idler_y_coordinates[1], upper_belt_radii[1]],
+           [upper_belt_idler_x_coordinates[2], upper_belt_idler_y_coordinates[2], upper_belt_radii[2]],
+           [upper_belt_idler_x_coordinates[3], upper_belt_idler_y_coordinates[3], upper_belt_radii[3]],
+           [upper_belt_idler_x_coordinates[4], upper_belt_idler_y_coordinates[4], upper_belt_radii[4]],
+           [upper_belt_idler_x_coordinates[5], upper_belt_idler_y_coordinates[5], upper_belt_radii[5]],
+           [upper_belt_idler_x_coordinates[6], upper_belt_idler_y_coordinates[6], upper_belt_radii[6]],
+           [upper_belt_idler_x_coordinates[7], upper_belt_idler_y_coordinates[7], upper_belt_radii[7]],
+           [upper_belt_idler_x_coordinates[8], upper_belt_idler_y_coordinates[8], upper_belt_radii[8]],
+           [upper_belt_end_position_x, upper_belt_end_position_y, 0]
+           ];
 
-  // gears
-  for ( i = [0:8] )
-    {
-      translate([upper_belt_idler_x_coordinates[i],
-                 upper_belt_idler_y_coordinates[i],
-                 0])
-        belt_gear();
-    }
+  belt(GT2x6, upper_belt_points, open=true);
 }

@@ -2,6 +2,7 @@ include <nopSCADlib/lib.scad>
 
 include <../global_vars.scad>
 include <../stl_files/main.scad>
+//include <../carriage/main.scad>
 
 module y_movement()
 {
@@ -16,21 +17,21 @@ module y_movement()
       carriage(MGN12C_carriage);
   }
 
-  // y rail mount blocks
-  for ( i = [1,-1] )
-    {
-      translate([i * 225, -130, 13])
-        rotate([0,0,i * 90])
-        rotate([0,0,90])
-        union() {
-        y_rail_mount();
-      }
-    }
+  // // y rail mount blocks
+  // for ( i = [1,-1] )
+  //   {
+  //     translate([i * 225, -130, 13])
+  //       rotate([0,0,i * 90])
+  //       rotate([0,0,90])
+  //       union() {
+  //       y_rail_mount();
+  //     }
+  //   }
 
   y_rail_mount_addatives();
 
 
-  // translate([current_x_position, 0,0]) x_movement();
+  //translate([current_x_position, -130, 0]) x_movement();
 }
 
 module x_movement()
@@ -38,7 +39,7 @@ module x_movement()
   //translate([22.2 + - 150, - 152.15 + 65,19.2]) rotate([0,180,90]) mgn_12_h();
   //translate([22.2 + - 150, - 152.15 + 65,19.2+ 20]) rotate([0,0,90]) mgn_12_h();
 
-  //translate([- 150,- 152.14 + 65,0]) carriage_qye();
+  translate([- 150,0,0]) carriage();
   //translate([-150,- 152.14 + 65, 26.2 + 13 - 52]) carriage_e3d();
 }
 

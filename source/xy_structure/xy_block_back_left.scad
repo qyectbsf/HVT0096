@@ -122,6 +122,8 @@ module block_back_left_addatives()
   if ( show_addatives == 1 )
     {
       translate([motor_rel_offset_x, motor_rel_offset_y, upper_belt_z - 8.3 -4]) nema_17_25mm_shaft();
-      translate([motor_rel_offset_x, motor_rel_offset_y, upper_belt_z - 8.3]) rotate([90,0,0]) gates_2gt_20t_toothed_pulley();
+      translate([motor_rel_offset_x + 15.52,
+                 motor_rel_offset_y - 15.52,
+                 lower_belt_z - 3])  pulley(GT2x20_plain_idler);
     }
 }

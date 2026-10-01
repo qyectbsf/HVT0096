@@ -17,19 +17,17 @@ module xy_structure()
 {
   if ( show_belts == 1 )
     {
-      color("green") translate([0,0,upper_belt_z]) upper_belt();
-      color("blue") translate([0,0,lower_belt_z]) lower_belt();
+      color("green") translate([0,0,upper_belt_z + 3]) upper_belt();
+      color("blue")  translate([0,0,lower_belt_z + 3]) lower_belt();
     }
 
   if ( show_xy_struct == 1 )
     {
-      // for ( i = [-1,1] ) translate([225 * i, -225, 0]) y_rail();
-
       if ( show_xy_front_left == 1)
         {
           translate([-225.0, -220.0, 0.0]) union()
             {
-              block_front_left();
+              //block_front_left();
               block_front_left_addatives();
             }
         }
@@ -38,8 +36,8 @@ module xy_structure()
         {
           translate([ 225.0, -220.0, 0.0]) union()
             {
-              block_front_right();
-              // block_front_right_addatives();
+              //block_front_right();
+              block_front_right_addatives();
             }
         }
 
@@ -47,7 +45,7 @@ module xy_structure()
         {
           translate([-225,220,0]) union()
             {
-              block_back_left();
+              //block_back_left();
               block_back_left_addatives();
             }
         }
@@ -56,7 +54,7 @@ module xy_structure()
         {
           translate([225,220,0]) union()
             {
-              block_back_right();
+              //block_back_right();
               block_back_right_addatives();
             }
         }
@@ -79,14 +77,14 @@ module xy_structure()
 
       if ( show_xy_back == 1 )
         {
-          translate([0,220 + 150,0]) union()
+          translate([0,0,0]) union()
             {
-              block_back();
+              // block_back();
               block_back_addatives();
             }
         }
 
-      if ( show_x_rail == 1)
+      if ( show_y_rail == 1)
         {
           for (i = [-1,1]){
             translate([i * (205 + 14 + 6), 0, 0])
@@ -100,7 +98,7 @@ module xy_structure()
         {
           translate([0, current_y_position, 0]) y_movement();
 
-          if ( show_y_rail == 1)
+          if ( show_x_rail == 1)
             {
               translate([0,205,500])
                 x_rail();
