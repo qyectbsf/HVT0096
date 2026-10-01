@@ -2,23 +2,47 @@ resolution = 10.0;
 
 show_belts = 0;
 show_frame = 1;
+show_screws = 0;
 
-show_z_struct = 1;
+show_z_struct = 0;
 show_z_left = 1;
 show_z_right = 1;
 show_z_back = 1;
 
+
+
 show_xy_struct = 1;
-show_xy_back_left = 1;
+
+show_xy_back_left = 0;
+show_xy_back_left_addatives = 0;
+
 show_xy_back_right = 0;
+show_xy_back_right_addatives = 0;
+
 show_xy_front_left = 1;
+show_xy_front_left_addatives = 1;
+
 show_xy_front_right = 1;
+show_xy_front_right_addatives = 1;
+
 show_xy_left = 0;
+show_xy_left_addatives = 0;
+
 show_xy_right = 0;
+show_xy_right_addatives = 0;
+
 show_xy_back = 0;
+show_xy_back_addatives = 0;
 
 show_x_rail = 0;
+show_x_rail_addatives = 0;
+
+
+
+show_y_struct = 1;
+
 show_y_rail = 1;
+show_y_rail_addatives = 1;
 
 show_bed = 0;
 show_bed_left = 1;
@@ -86,7 +110,7 @@ lower_belt_idler_x_coordinates =
    -180 + current_x_position];
 
 lower_belt_idler_y_coordinates =
-  [-110 + current_y_position,
+  [-110 + current_y_position - 28,
    motor_abs_offset_y -150,
    motor_abs_offset_y + belt_distance + belt_thickness -150,
    motor_abs_offset_y + belt_distance + belt_thickness + belt_tention_strength -150,
@@ -122,7 +146,7 @@ lower_belt_y_coordinates =
    lower_belt_idler_y_coordinates[9] + ( belt_distance + belt_thickness ) / 2];
 
 lower_belt_z = 23.5;
-lower_belt_idler_z = lower_belt_z -3;
+lower_belt_idler_z = lower_belt_z -2.5;
 
 upper_belt_split_lengths =
   [80 + current_x_position,
@@ -161,7 +185,7 @@ upper_belt_idler_x_coordinates =
    -180 + current_x_position];
 
 upper_belt_idler_y_coordinates =
-  [-122.5 + current_y_position,
+  [-123.0 + current_y_position,
    -230 + 40,
    300 - 150,
    motor_abs_offset_y -150,
@@ -197,7 +221,7 @@ upper_belt_y_coordinates =
    upper_belt_idler_y_coordinates[9] - ( belt_distance + belt_thickness ) / 2 - 29.5,];
 
 upper_belt_z = 34.5;
-upper_belt_idler_z = upper_belt_z -3;
+upper_belt_idler_z = upper_belt_z -2.5;
 
 printed_wall_width = 6.5;
 
@@ -233,7 +257,7 @@ left_bed_rail_angle = 0.0;
 right_bed_rail_angle = -left_bed_rail_angle;
 back_bed_rail_angle = 0.0;
 
-idler_height = 10.0;
+idler_height = 9.0;
 idler_cutout_height = idler_height + 2;
 
 mcl_clamp_height = 9.0;

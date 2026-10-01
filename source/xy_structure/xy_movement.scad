@@ -141,33 +141,35 @@ module y_rail_mount_addatives()
             // upper idler stab
             translate([-3,8,-0.1]) cylinder(h = 50, d = 3.1, $fn = resolution);
 
-            // // rail m3 screw
-            // for (i = [-1,1]) {
-            //   translate([10,7.5 * i,-0.1 + 20 - 2.4])
-            //     screw("M3", length=40, head="socket", drive="hex");
-            // }
-            // for (i = [-1,1]) {
-            //   translate([-10,7.5 * i,-0.1 + 0.6])
-            //     screw("M3", length=10, head="socket", drive="hex");
-            // }
+            if ( show_screws == 1) {
+              // rail m3 screw
+              for (i = [-1,1]) {
+                translate([10,7.5 * i,-0.1 + 20 - 2.4])
+                  screw("M3", length=40, head="socket", drive="hex");
+              }
+              for (i = [-1,1]) {
+                translate([-10,7.5 * i,-0.1 + 0.6])
+                  screw("M3", length=10, head="socket", drive="hex");
+              }
 
-            // // x rail m5 screw
-            // for (i = [20.1, 32.9]) {
-            //   translate([i,0,31.1])
-            //     screw("M5", length=14, head="socket", drive="hex");
-            // }
-            // translate([32.9,0,3.5])
-            //   rotate([0,180,0])
-            //   screw("M5", length=12, head="socket", drive="hex");
-            // translate([20.1,0,-1])
-            //   rotate([0,180,0])
-            //   screw("M5", length=22, head="socket", drive="hex");
+              // x rail m5 screw
+              for (i = [20.1, 32.9]) {
+                translate([i,0,31.1])
+                  screw("M5", length=14, head="socket", drive="hex");
+              }
+              translate([32.9,0,3.5])
+                rotate([0,180,0])
+                screw("M5", length=12, head="socket", drive="hex");
+              translate([20.1,0,-1])
+                rotate([0,180,0])
+                screw("M5", length=22, head="socket", drive="hex");
 
-            // // m3 for orientation of the square
-            // for (i = [-1, 1])
-            // translate([15.8 + 7, 8 * i, -5])
-            //   rotate([0,90,0])
-            //   screw("M3", length=14, head="socket", drive="hex");
+              // m3 for orientation of the square
+              for (i = [-1, 1])
+                translate([15.8 + 7, 8 * i, -5])
+                  rotate([0,90,0])
+                  screw("M3", length=14, head="socket", drive="hex");
+            }
           }
         }
     }
