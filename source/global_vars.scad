@@ -1,4 +1,4 @@
-resolution = 10.0;
+resolution = 200.0;
 
 show_belts = 1;
 show_frame = 1;
@@ -20,7 +20,7 @@ show_xy_back_right = 0;
 show_xy_back_right_addatives = 0;
 
 show_xy_front_left = 1;
-show_xy_front_left_addatives = 1;
+show_xy_front_left_addatives = 0;
 
 show_xy_front_right = 1;
 show_xy_front_right_addatives = 1;
@@ -52,8 +52,8 @@ show_bed_back = 0;
 show_bed_angle_marker = 0;
 show_addatives = 1;
 
-current_x_position = 300.0;
-current_y_position = -25.0; // [-25.8, 342.0]
+current_x_position = 0.0;
+current_y_position = 293.0; // [-25.8, 293.0]
 current_z_position = -13.0 + 0.0 + 100;
 
 belt_thickness = 1.5;
@@ -100,7 +100,7 @@ lower_belt_idler_y_coordinates =
    - 122.00 + current_y_position];
 
 lower_belt_z = 23.5;
-lower_belt_idler_z = lower_belt_z -2.5;
+lower_belt_idler_z = lower_belt_z -1.25;
 
 // upper belt
 upper_belt_start_position_x = current_x_position - 150 + 20;
@@ -131,7 +131,7 @@ upper_belt_idler_y_coordinates =
    - 140.00 + current_y_position];
 
 upper_belt_z = 34.5;
-upper_belt_idler_z = upper_belt_z -2.5;
+upper_belt_idler_z = upper_belt_z -1.25;
 
 printed_wall_width = 6.5;
 
@@ -249,6 +249,19 @@ module ruland_mcl_10_f_clamping_shaft_collar()
     }
 }
 
+
+module mr115zz_bearing() {
+    color("Silver")
+    difference() {
+        cylinder(d=11, h=4, center=true, $fn=64);
+        cylinder(d=5, h=4 + 1, center=true, $fn=64);
+    }
+}
+
+module mr115zz_housing_cutout(tolerance = 0.2) {
+    cylinder(d=11 + tolerance, h=4 + 1, center=true, $fn=64);
+}
+
 module z_motor()
 {
   cylinder(h = 24, d = 5, $fn = resolution);
@@ -312,11 +325,14 @@ module xy_motor_screw_cutout()
 {
   for ( x = [-1,1], y = [-1,1] )
     {
-      union()
-      {
-        translate([x * 17.25, y * 17.25, -0.1]) cylinder(h = 5.5, d = 2.9, $fn = resolution);
-        translate([x * 17.25, y * 17.25, 5.2]) cylinder(h = 100, d = 5, $fn = resolution);
-      }
+      if (x != 1 || y != -1)
+        {
+          union()
+            {
+              translate([x * 15.52, y * 15.52, -0.1]) cylinder(h = 5.5, d = 2.9, $fn = resolution);
+              translate([x * 15.52, y * 15.52, 5.2]) cylinder(h = 100, d = 5, $fn = resolution);
+            }
+        }
     }
 }
 

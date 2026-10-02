@@ -15,17 +15,14 @@ module main()
 {
   frame();
 
-  translate([0, 110,0])
+  translate([0, 110 - 77, 570])
     z_structure();
 
-  translate([0, 110, -46.8348 - 0.05])
+  translate([0, 110 - 77, -46.8348 - 0.05 + 570.00])
     bed();
 
-  translate([0,0,570])
+  translate([0,0, 570])
     xy_structure();
-
-
-  // translate([0,270,0]) tool_changer();
 }
 
 main();

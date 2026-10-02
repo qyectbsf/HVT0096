@@ -1,129 +1,218 @@
+include <BOSL2/std.scad>
+include <BOSL2/screws.scad>
+include <nopSCADlib/lib.scad>
+
 include <../global_vars.scad>
 
 module block_back_left()
 {
-  difference()
-    {
-      union()
-      {
-        primary_back_left();
-        secondary_back_left();
-      }
-
-      // block back left combiner
-      for (i = [7.0, 60])
-        {
-          translate([-9.0, -30.0, i])
-            rotate([0.0, -90.0, 0.0])
-            cylinder(h = 20, d = 3.0, $fn = resolution);
-        }
-    }
+  primary_back_left();
+  secondary_back_left();
 }
 
 module primary_back_left()
 {
-  union()
-  {
-    difference()
-      {
-        // structure to subtract from
-        hull()
-          {
-            translate([-15 -printed_wall_width, -100 + 15, -30.0]) cube([printed_wall_width, 100, 100.0]);
-            translate([-54 - 15, -100 + 15, upper_belt_z - 8.3 -4 ]) cube([printed_wall_width, 100, 26.0]);
-          }
+  difference()
+    {
+      // main object to subtract from
+      union()
+        {
+          translate([-15 -printed_wall_width, -86 + 15, -30.0]) cube([printed_wall_width, 86, 100.0]);
+          hull()
+            {
+              translate([-15 -printed_wall_width, -5.5 + 15, -30.0]) cube([1.0, 5.5, 100.0]);
+              translate([motor_rel_offset_x - 10, -5.5 + 15, upper_belt_z -13.2]) cube([1, 5.5, 30.0]);
+            }
+          hull()
+            {
+              translate([-15 -printed_wall_width, -86 + 15, -30.0]) cube([1.0, 5.5, 100.0]);
+              translate([motor_rel_offset_x - 10, -86 + 15, upper_belt_z -13.2]) cube([1, 5.5, 30.0]);
+            }
+          hull()
+            {
+              translate([motor_rel_offset_x -22, motor_rel_offset_y -22, upper_belt_z -13.2]) cube([1, 44, 30.0]);
+              translate([motor_rel_offset_x -10, motor_rel_offset_y -43, upper_belt_z -13.2]) cube([1, 86, 30.0]);
+            }
+          translate([motor_rel_offset_x -10, motor_rel_offset_y -43, upper_belt_z -13.2]) cube([35, 86, 30.0]);
 
-        // subtract main voids
-        subract_void( x = motor_rel_offset_x - 23.0, y = motor_rel_offset_y - 21.0, z = -30.0,
-                      cube_x = 44.0, cube_y = 42.0, cube_z = upper_belt_z + 14.2 );
+        }
+      // motor shaft plus bearing and pulley
+      translate([motor_rel_offset_x, motor_rel_offset_y, upper_belt_z - 12.5]) xy_motor_shaft_cutout();
 
-        subract_void( x = -69.0, y = motor_rel_offset_y - 21.0, z = upper_belt_z - 3.8,
-                      cube_x = 44.0, cube_y = 42.0, cube_z =  9.0 );
+      // 3 out of 4 screws for motor mount
+      translate([motor_rel_offset_x, motor_rel_offset_y, upper_belt_z - 12.5]) xy_motor_screw_cutout();
 
-        subract_void( x = -76.0, y = -76.5, z = upper_belt_z + 17.1,
-                      cube_x = 44.0, cube_y = 83.0, cube_z = upper_belt_z + 14.2 );
+      //space for idler
+      translate([motor_rel_offset_x + 15.52, motor_rel_offset_y - 15.52, upper_belt_idler_z - 1.25]) idler_cutout(21);
 
-        // motor shaft and m3 screws
-        translate([motor_rel_offset_x, motor_rel_offset_y, upper_belt_z - 12.3]) xy_motor_shaft_cutout();
-        translate([motor_rel_offset_x, motor_rel_offset_y, upper_belt_z - 12.3]) xy_motor_screw_cutout();
+      // space for 3mm stab
+      translate([motor_rel_offset_x + 15.52, motor_rel_offset_y - 15.52, upper_belt_idler_z - 1.25])
+        cylinder(h =70.0, d = 3mm_stab, $fn = resolution, center = true);
 
-        // alu profile mount hole
-        translate([-15.0,   0.0, -20.0]) rotate([0, -90, 0]) xy_m6_screw_cutout();
-        translate([-15.0,   0.0,  upper_belt_z]) rotate([0, -90, 0]) xy_m6_screw_cutout();
-        translate([-15.0,   0.0,  55.0]) rotate([0, -90, 0]) xy_m6_screw_cutout();
-        translate([-15.0, -70.0, -15.0]) rotate([0, -90, 0]) xy_m6_screw_cutout();
+      // space for belt
+      translate([225,-220,upper_belt_z + 3]) upper_belt_cutout();
 
-        translate([motor_rel_offset_x + 16, motor_rel_offset_y - 42, upper_belt_z - 3])
-          idler_cutout(width = 20);
+      // space for idler assembly
+      translate([motor_rel_offset_x +15.52 - 10, motor_rel_offset_y -44, upper_belt_z - 2.5]) cube([20, 25, 11.0]);
 
-        translate([motor_rel_offset_x - 2, motor_rel_offset_y - 2, upper_belt_z - 2])
-          rotate([0,0,180 + 37.2])
-          cube([belt_thickness + 6, 43, belt_height + 4]);
-
-        translate([motor_rel_offset_x + 16, motor_rel_offset_y - 42, upper_belt_z - 3])
-          difference()
-          {
-            hull()
-              {
-                cylinder(h = idler_cutout_height, d = 19, $fn = resolution);
-                translate([0,-30,0])
-                  cylinder(h = idler_cutout_height, d = 19, $fn = resolution);
-
-              }
-            cylinder(h = idler_cutout_height, d = 19, $fn = resolution);
-
-          }
-        translate([motor_rel_offset_x + 16, motor_rel_offset_y - 42, 10])
-          cylinder(h = 60, d = 5mm_stab, $fn = resolution);
-
-        translate([motor_rel_offset_x, motor_rel_offset_y + 10, upper_belt_z - 2])
-          rotate([0,0,-90])
-          cube([belt_thickness + 6, 43, belt_height + 4]);
-
+      // space for m6
+      for (z = [-15,10,60.5]){
+        translate([-19, 0, z])
+          rotate([0, 90, 0])
+          cylinder(h = 10, d = m6_screw, center = true, $fn = resolution);
       }
-  }
+      translate([-19, - 86 + 30, -15])
+        rotate([0, 90, 0])
+        cylinder(h = 10, d = m6_screw, center = true, $fn = resolution);
+
+    }
 }
 
 module secondary_back_left()
 {
-  difference()
-    {
-      // main structure to subtract from
-      translate([-15.0, -45.0, 0]) cube([30,30,70]);
+  difference(){
+    // the main object the subtract form
+    union()
+      {
+        translate([+15, -53 + 15, -30.0]) cube([6.5, 53, 100.0]);
+        translate([-15, -53 + 15, 10.0]) cube([36.5, 23, 60.0]);
+      }
 
-      // subtract void
-      subract_void( x = -15 + 5+  3.5, y = -45, z = 0,
-                    cube_x = 30 - 5 - 3.5, cube_y = 30 - 5 - 3.5,  cube_z = lower_belt_z - 3.5 - 5 -3);
+    // back alu profile
+    translate([+15 -0.1, -30 + 15, -31]) cube([6.7, 31, 31]);
 
-      subract_void( x = -15 + 5+  3.5, y = -45, z = upper_belt_z + belt_height + 5 + 3.5 + 3,
-                    cube_x = 30 - 5 - 3.5, cube_y = 30 - 5 - 3.5,  cube_z = 30 );
+    // deco but less deco
+    translate([-15.1, -53 + 15 -6.5, 51.0]) cube([36.7, 23, 60.0]);
 
-      // subtract m6 alu mount
-      translate([0,-14.9, 55]) rotate([90,0,0]) cylinder(h = 5.2, d = m6_screw, $fn = resolution);
+    // belt space
+    translate([225,-220,lower_belt_z + 3]) lower_belt_cutout();
+    translate([225,-220,upper_belt_z + 3]) upper_belt_cutout();
 
-      // subtract idler
-      translate([-3,-28,lower_belt_z - 3]) idler_cutout(20);
+    // idler space
+    translate([motor_rel_offset_x + 43, motor_rel_offset_y, lower_belt_idler_z - 1.25])
+      idler_cutout(21);
+    translate([motor_rel_offset_x + 43 - 10, motor_rel_offset_y - 20, lower_belt_idler_z - 1.25])
+      cube([20, 25, 11.0]);
 
-      // subtract space for belts
-      difference()
-        {
-          translate([-15.1, -45.1, lower_belt_z - 3]) cube([30.2,30.2,upper_belt_z - lower_belt_z + 6 + 6]);
-          translate([-7.4,  -45.1, lower_belt_z - 3]) cube([22.5,22.5, upper_belt_z - lower_belt_z + 6 + 6]);
-          translate([-3,-28,lower_belt_z - 3]) cylinder(h = idler_cutout_height, d = 19, $fn = resolution);
-        }
+    // idler stab space
+    translate([motor_rel_offset_x + 43, motor_rel_offset_y, lower_belt_idler_z - 1.25])
+      cylinder(h =70.0, d = 3mm_stab, $fn = resolution, center = true);
 
-      // subtract 5mm stab
-      translate([-3,-28,lower_belt_z - 3 - 4]) cylinder(h = 40, d = 5mm_stab, $fn = resolution);
+    // m6 screw
+    translate([0, -18.58, 60.5])
+      rotate([-90,0,0])
+      cylinder(h = 10, d = m6_screw, center = true, $fn = resolution);
+    translate([+19, - 15 - 12.5, -15])
+      rotate([0,-90,0])
+      cylinder(h = 10, d = m6_screw, center = true, $fn = resolution);
+    for (z = [15,55]){
+      translate([+19, 0, z])
+        rotate([0,-90,0])
+        cylinder(h = 10, d = m6_screw, center = true, $fn = resolution);
     }
+  }
 }
 
 module block_back_left_addatives()
 {
-  if ( show_addatives == 1 )
+  // stepper motor
+  translate([motor_rel_offset_x, motor_rel_offset_y, upper_belt_z - 8.3 -4]) nema_17_25mm_shaft();
+
+  // idler
+  translate([motor_rel_offset_x + 15.52, motor_rel_offset_y - 15.52, upper_belt_idler_z])
+    pulley(GT2x20_plain_idler);
+  translate([motor_rel_offset_x + 15.52, motor_rel_offset_y - 15.52, upper_belt_idler_z])
+    cylinder(h =70.0, d = 3mm_stab, $fn = resolution, center = true);
+
+  // motor pulley
+  translate([motor_rel_offset_x, motor_rel_offset_y, upper_belt_z - 7.25]) pulley(GT2x20ob_pulley);
+
+  // bearing
+  translate([motor_rel_offset_x, motor_rel_offset_y, upper_belt_z + 10.5]) mr115zz_bearing();
+
+  // idler
+  translate([motor_rel_offset_x + 43, motor_rel_offset_y, lower_belt_idler_z ]) pulley(GT2x20_toothed_idler);
+  translate([motor_rel_offset_x + 43, motor_rel_offset_y, lower_belt_idler_z - 1.25])
+    cylinder(h =70.0, d = 3mm_stab, $fn = resolution, center = true);
+
+  if (show_screws == 1)
     {
-      translate([motor_rel_offset_x, motor_rel_offset_y, upper_belt_z - 8.3 -4]) nema_17_25mm_shaft();
-      translate([motor_rel_offset_x + 15.52,
-                 motor_rel_offset_y - 15.52,
-                 lower_belt_z - 3])  pulley(GT2x20_plain_idler);
+      // m6 screw
+      translate([0, -18.58, 60.5])
+        rotate([180,0,0])
+        union() {
+        rotate([-90.0, 0.0, 0.0])
+          screw("M6", length=14, head="socket", drive="hex");
+
+        // washer
+        translate([0, 3.2, 0])
+          rotate([90,0,0])
+          tube(id=6.4, od=18.0, h=1.6);
+
+        // t sliding nut
+        translate([0,-5.6,0])
+          rotate([90,90,0])
+          sliding_t_nut(M6_sliding_t_nut);
+      }
+
+      translate([19.1, -15 - 12.5, -15])
+        union() {
+        rotate([0.0, 90.0, 0.0])
+          screw("M6", length=14, head="socket", drive="hex");
+
+        translate([3.2, 0, 0])
+          rotate([0, 90, 0])
+          tube(id=6.4, od=18.0, h=1.6);
+
+        translate([-6.1, 0, 0])
+          rotate([90,0,-90])
+          sliding_t_nut(M6_sliding_t_nut);
+      }
+
+      for (z = [15, 55]){
+        translate([19.1, 0, z])
+          union() {
+          rotate([0.0, -90.0, 180.0])
+            screw("M6", length=14, head="socket", drive="hex");
+
+          translate([3.2, 0, 0])
+            rotate([0, 90, 0])
+            tube(id=6.4, od=18.0, h=1.6);
+
+          translate([-6.1, 0, 0])
+            rotate([90,90,-90])
+            sliding_t_nut(M6_sliding_t_nut);
+        }
+      }
+
+      for (z = [-15,10,60.5]){
+        translate([-19.1, 0, z])
+          union() {
+          rotate([0.0, -90.0, 0.0])
+            screw("M6", length=14, head="socket", drive="hex");
+
+          translate([-3.2, 0, 0])
+            rotate([0, 90, 0])
+            tube(id=6.4, od=18.0, h=1.6);
+
+          translate([6.1, 0, 0])
+            rotate([90,90,90])
+            sliding_t_nut(M6_sliding_t_nut);
+        }
+      }
+
+      translate([-19.1, - 86 + 30, -15])
+        union() {
+        rotate([0.0, -90.0, 0.0])
+          screw("M6", length=14, head="socket", drive="hex");
+
+        translate([-3.2, 0, 0])
+          rotate([0, 90, 0])
+          tube(id=6.4, od=18.0, h=1.6);
+
+        translate([6.1, 0, 0])
+          rotate([90,0,90])
+          sliding_t_nut(M6_sliding_t_nut);
+      }
     }
 }

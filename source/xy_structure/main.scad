@@ -27,8 +27,11 @@ module xy_structure()
         {
           translate([-225.0, -220.0, 0.0]) union()
             {
-              //block_front_left();
-              block_front_left_addatives();
+              block_front_left();
+              if ( show_xy_front_left_addatives == 1 )
+                {
+                  block_front_left_addatives();
+                }
             }
         }
 
@@ -36,8 +39,11 @@ module xy_structure()
         {
           translate([ 225.0, -220.0, 0.0]) union()
             {
-              //block_front_right();
-              block_front_right_addatives();
+              block_front_right();
+              if ( show_xy_front_right_addatives == 1 )
+                {
+                  block_front_right_addatives();
+                }
             }
         }
 
@@ -45,8 +51,11 @@ module xy_structure()
         {
           translate([-225,220,0]) union()
             {
-              //block_back_left();
-              block_back_left_addatives();
+              block_back_left();
+              if ( show_xy_back_left_addatives == 1 )
+                {
+                  block_back_left_addatives();
+                }
             }
         }
 
@@ -54,8 +63,11 @@ module xy_structure()
         {
           translate([225,220,0]) union()
             {
-              //block_back_right();
-              block_back_right_addatives();
+              // block_back_right();
+              if ( show_xy_back_right_addatives == 1 )
+                {
+                  block_back_right_addatives();
+                }
             }
         }
 
@@ -63,7 +75,11 @@ module xy_structure()
         {
           translate([-240,0,0]) union()
             {
-              block_left();
+              // block_left();
+              if ( show_xy_left_addatives == 1 )
+                {
+                  block_left_addatives();
+                }
             }
         }
 
@@ -71,7 +87,11 @@ module xy_structure()
         {
           translate([240,0,0]) union()
             {
-              block_right();
+              // block_right();
+              if ( show_xy_right_addatives == 1 )
+                {
+                  block_right();
+                }
             }
         }
 
@@ -80,7 +100,10 @@ module xy_structure()
           translate([0,0,0]) union()
             {
               // block_back();
-              block_back_addatives();
+              if ( show_xy_back_addatives == 1 )
+                {
+                  block_back_addatives();
+                }
             }
         }
 

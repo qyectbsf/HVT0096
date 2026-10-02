@@ -24,7 +24,7 @@ module block_front_left()
         translate([-15.0, 20.0, 14.0]) cube([30.0, 30.0, 7.0]);
       }
       // space for idler
-      translate([-18.5, 30, upper_belt_idler_z]) idler_cutout(21);
+      translate([-18.5, 30, upper_belt_idler_z - 1.25]) idler_cutout(21);
 
       // space for 3mm stab
       translate([-18.5,30,40])
@@ -50,51 +50,34 @@ module block_front_left()
 
 module block_front_left_addatives()
 {
-  if ( show_xy_front_left_addatives == 1 )
-    {
-      // idler
-      translate([-18.5, 30, upper_belt_z - 2 + 0.75]) rotate([0,0,0]) pulley(GT2x20_toothed_idler);
+  // idler
+  translate([-18.5, 30, upper_belt_z - 2 + 0.75]) rotate([0,0,0]) pulley(GT2x20_toothed_idler);
 
-      // 3mm stab
-      translate([-18.5,30,40])
-        cylinder(h =70.0, d = 3mm_stab, $fn = resolution, center = true);
+  // 3mm stab
+  translate([-18.5,30,40])
+    cylinder(h =70.0, d = 3mm_stab, $fn = resolution, center = true);
 
-      if ( show_screws == 1) {
-        // m6 screw
-        translate([0, 15 + 3 -1 + 1.6, 40.0])
-          union() {
-          rotate([-90.0, 0.0, 0.0])
-            screw("M6", length=14, head="socket", drive="hex");
+  if ( show_screws == 1) {
+    // m6 screw
+    translate([0, 15 + 3 -1 + 1.6, 40.0])
+      union() {
+      rotate([-90.0, 0.0, 0.0])
+        screw("M6", length=14, head="socket", drive="hex");
 
-          // washer
-          translate([0, 3.2, 0])
-            rotate([90,0,0])
-            tube(id=6.4, od=18.0, h=1.6);
+      // washer
+      translate([0, 3.2, 0])
+        rotate([90,0,0])
+        tube(id=6.4, od=18.0, h=1.6);
 
-          // t sliding nut
-          translate([0,-5.6,0])
-            rotate([90,90,0])
-            sliding_t_nut(M6_sliding_t_nut);
-        }
+      // t sliding nut
+      translate([0,-5.6,0])
+        rotate([90,90,0])
+        sliding_t_nut(M6_sliding_t_nut);
+    }
 
-        for (i = [-15.0, 20.0, 55.0])
-          {
-            translate([-19.1, 0, i])
-              union() {
-              rotate([0.0, -90.0, 0.0])
-                screw("M6", length=14, head="socket", drive="hex");
-
-              translate([-3.2, 0, 0])
-                rotate([0, 90, 0])
-                tube(id=6.4, od=18.0, h=1.6);
-
-              translate([6.1, 0, 0])
-                rotate([90, 90, 90])
-                sliding_t_nut(M6_sliding_t_nut);
-            }
-          }
-
-        translate([-19.1, 30, -15.0])
+    for (i = [-15.0, 20.0, 55.0])
+      {
+        translate([-19.1, 0, i])
           union() {
           rotate([0.0, -90.0, 0.0])
             screw("M6", length=14, head="socket", drive="hex");
@@ -104,11 +87,25 @@ module block_front_left_addatives()
             tube(id=6.4, od=18.0, h=1.6);
 
           translate([6.1, 0, 0])
-            rotate([90,90,90])
+            rotate([90, 90, 90])
             sliding_t_nut(M6_sliding_t_nut);
         }
       }
+
+    translate([-19.1, 30, -15.0])
+      union() {
+      rotate([0.0, -90.0, 0.0])
+        screw("M6", length=14, head="socket", drive="hex");
+
+      translate([-3.2, 0, 0])
+        rotate([0, 90, 0])
+        tube(id=6.4, od=18.0, h=1.6);
+
+      translate([6.1, 0, 0])
+        rotate([90,90,90])
+        sliding_t_nut(M6_sliding_t_nut);
     }
+  }
 }
 
 // block_front_left();
