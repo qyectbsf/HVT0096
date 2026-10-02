@@ -63,7 +63,7 @@ module xy_structure()
         {
           translate([225,220,0]) union()
             {
-              // block_back_right();
+              block_back_right();
               if ( show_xy_back_right_addatives == 1 )
                 {
                   block_back_right_addatives();
