@@ -38,9 +38,6 @@ module x_movement()
   //translate([-150,- 152.14 + 65, 26.2 + 13 - 52]) carriage_e3d();
 }
 
-module y_rail_mount() {
-}
-
 module y_rail_mount_addatives()
 {
   // idler

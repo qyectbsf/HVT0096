@@ -16,11 +16,11 @@ show_xy_struct = 1;
 show_xy_back_left = 1;
 show_xy_back_left_addatives = 1;
 
-show_xy_back_right = 0;
-show_xy_back_right_addatives = 0;
+show_xy_back_right = 1;
+show_xy_back_right_addatives = 1;
 
 show_xy_front_left = 1;
-show_xy_front_left_addatives = 0;
+show_xy_front_left_addatives = 1;
 
 show_xy_front_right = 1;
 show_xy_front_right_addatives = 1;
@@ -31,11 +31,11 @@ show_xy_left_addatives = 0;
 show_xy_right = 0;
 show_xy_right_addatives = 0;
 
-show_xy_back = 1;
-show_xy_back_addatives = 1;
+show_xy_back = 0;
+show_xy_back_addatives = 0;
 
-show_x_rail = 0;
-show_x_rail_addatives = 0;
+show_x_rail = 1;
+show_x_rail_addatives = 1;
 
 
 
@@ -44,16 +44,16 @@ show_y_struct = 1;
 show_y_rail = 1;
 show_y_rail_addatives = 1;
 
-show_bed = 0;
-show_bed_left = 0;
-show_bed_right = 0;
-show_bed_back = 0;
+show_bed = 1;
+show_bed_left = 1;
+show_bed_right = 1;
+show_bed_back = 1;
 
 show_bed_angle_marker = 0;
 show_addatives = 1;
 
 current_x_position = 0.0;
-current_y_position = 293.0; // [-25.8, 293.0]
+current_y_position = -0.0; // [-25.8, 293.0]
 current_z_position = -13.0 + 0.0 + 100;
 
 belt_thickness = 1.5;
@@ -73,7 +73,7 @@ motor_rel_offset_y = motor_abs_offset_y - frame_back_left_y;
 
 // lower belt
 lower_belt_start_position_x = current_x_position - 150 + 20;
-lower_belt_start_position_y = current_y_position - 131 - 15;
+lower_belt_start_position_y = current_y_position - 131 - 15 + 2;
 lower_belt_end_position_x   = current_x_position - 150 - 20;
 lower_belt_end_position_y   = current_y_position - 131 + 15;
 
@@ -89,7 +89,7 @@ lower_belt_idler_x_coordinates =
    + 231.40];
 
 lower_belt_idler_y_coordinates =
-  [- 140.00 + current_y_position,
+  [- 140.00 + current_y_position + 2,
    + 192.00,
    + 204.05,
    + 204.05 + belt_tention_strength,
@@ -106,7 +106,7 @@ lower_belt_idler_z = lower_belt_z -1.25;
 upper_belt_start_position_x = current_x_position - 150 + 20;
 upper_belt_start_position_y = current_y_position - 131 + 15;
 upper_belt_end_position_x   = current_x_position - 150 - 20;
-upper_belt_end_position_y   = current_y_position - 131 - 15;
+upper_belt_end_position_y   = current_y_position - 131 - 15 + 2;
 
 upper_belt_idler_x_coordinates =
   [- 231.40,
@@ -128,7 +128,7 @@ upper_belt_idler_y_coordinates =
    + 204.05 + belt_tention_strength,
    + 204.05,
    + 192.00,
-   - 140.00 + current_y_position];
+   - 140.00 + current_y_position + 2];
 
 upper_belt_z = 34.5;
 upper_belt_idler_z = upper_belt_z -1.25;
