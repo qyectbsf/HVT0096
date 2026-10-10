@@ -45,19 +45,19 @@ module y_rail_mount_left ()
     }
 
     // idler space
-    translate([-3 ,-8,lower_belt_z - 15]) idler_cutout_wip();
-    translate([-3 - 3.4,8,upper_belt_z - 15]) idler_cutout_wip();
+    translate([-3 ,-8,lower_belt_z - 15]) idler_cutout(21.5);
+    translate([-3 - 3.4,8,upper_belt_z - 15]) idler_cutout(21.5);
 
     // idler 3mm stab
-    translate([-3 ,-8,-0.1]) cylinder(h = 50, d = 3.1, $fn = resolution);
-    translate([-3 -3.4,8,-0.1]) cylinder(h = 50, d = 3.1, $fn = resolution);
+    translate([-3 ,-8,-0.1]) cylinder(h = 50, d = 3mm_stab, $fn = resolution);
+    translate([-3 -3.4,8,-0.1]) cylinder(h = 50, d = 3mm_stab, $fn = resolution);
 
     // belt space
-    translate([-13.2 + 27,14.15 - 1.9 - 0.15,upper_belt_z -15 + 5])
+    translate([-13.2 + 27 + 10,14.15 - 1.9 - 0.15,upper_belt_z -15 + 5])
       cube([54,4.3,8], center = true);
     translate([-13.2,0,upper_belt_z -15 + 5])
       cube([10,28.4,11.1], center = true);
-    translate([-13.2 + 27,-14.15 + 1.9 + 0.15,lower_belt_z -15 + 5])
+    translate([-13.2 + 27 + 10,-14.15 + 1.9 + 0.15,lower_belt_z -15 + 5])
       cube([54,4.3,8], center = true);
     translate([-13.2,0,lower_belt_z -15 + 5])
       cube([10,28.4,11.1], center = true);
@@ -84,3 +84,5 @@ module y_rail_mount_left ()
     }
   }
 }
+
+//y_rail_mount_left();

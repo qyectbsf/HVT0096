@@ -123,8 +123,13 @@ module xy_structure()
 
           if ( show_x_rail == 1)
             {
-              translate([0,205,500])
-                x_rail();
+              translate([0, -130 + current_y_position, 19.2])
+                rotate([180,0,0])
+                rail(MGN12, 370);
+
+              translate([-150 + current_x_position, -130 + current_y_position, 19.2])
+                rotate([180,0,0])
+                carriage(MGN12H_carriage);
             }
 
         }

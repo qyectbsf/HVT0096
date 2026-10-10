@@ -22,7 +22,7 @@ module main()
     bed();
 
   translate([0,0, 570])
-    xy_structure();
+     xy_structure();
 }
 
 main();
