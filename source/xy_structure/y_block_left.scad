@@ -6,7 +6,7 @@ module y_rail_mount_left ()
 {
   difference() {
     // main block to subtract from
-    union() {
+   union() {
       translate([-13.1,-28.3 / 2,0])
         cube([52, 28.3, 36]);
       translate([13.5,-28.3 / 2,-10])
@@ -18,7 +18,7 @@ module y_rail_mount_left ()
       cube([40,20,20]);
 
     // deco
-    translate([29.5,-28.3 / 2,-13.5])
+    translate([29.5,-28.3 / 2,-13.5 - 0.1])
       minkowski()
       {
         cube([20, 28.3, 10]);
@@ -29,6 +29,14 @@ module y_rail_mount_left ()
     for (i = [20.1, 32.9]) {
       translate([i,0,-20])
         cylinder(r = 2.6, h = 60, $fn = resolution);
+    }
+
+    translate([20.1,0,-11])
+      cylinder(r = 5.0, h = 2.0, $fn = resolution);
+
+    for (i = [20.1, 32.9]) {
+      translate([i,0,36 - 1.75])
+        cylinder(r = 5.0, h = 2.0, $fn = resolution);
     }
 
     // angle adjust
@@ -45,41 +53,54 @@ module y_rail_mount_left ()
     }
 
     // idler space
-    translate([-3 ,-8,lower_belt_z - 15]) idler_cutout_wip();
-    translate([-3 - 3.4,8,upper_belt_z - 15]) idler_cutout_wip();
+    translate([lower_belt_idler_x_coordinates[0] +225,
+               lower_belt_idler_y_coordinates[0] +130 - current_y_position,
+               lower_belt_z - 15]) idler_cutout_wip();
+    translate([upper_belt_idler_x_coordinates[0] +225,
+               upper_belt_idler_y_coordinates[0] +130 - current_y_position,
+               upper_belt_z - 15]) idler_cutout_wip();
 
     // idler 3mm stab
-    translate([-3 ,-8,-0.1]) cylinder(h = 50, d = 3.1, $fn = resolution);
-    translate([-3 -3.4,8,-0.1]) cylinder(h = 50, d = 3.1, $fn = resolution);
+    translate([lower_belt_idler_x_coordinates[0] +225,
+               lower_belt_idler_y_coordinates[0] +130 - current_y_position,
+               7]) cylinder(h = 50, d = 3.1, $fn = resolution);
+    translate([upper_belt_idler_x_coordinates[0] +225,
+               upper_belt_idler_y_coordinates[0] +130 - current_y_position,
+               18]) cylinder(h = 50, d = 3.1, $fn = resolution);
 
     // belt space
-    // translate([-13.2 + 27,14.15 - 1.9 - 0.15,upper_belt_z -15 + 5])
-    //   cube([54,4.3,8], center = true);
-    // translate([-13.2,0,upper_belt_z -15 + 5])
-    //   cube([10,28.4,11.1], center = true);
-    // translate([-13.2 + 27,-14.15 + 1.9 + 0.15,lower_belt_z -15 + 5])
-    //   cube([54,4.3,8], center = true);
-    // translate([-13.2,0,lower_belt_z -15 + 5])
-    //   cube([10,28.4,11.1], center = true);
+    translate([-15,0,lower_belt_z -4.5])
+      cube([10,28.4,21], center = true);
+    translate([225, 130 - current_y_position, 13 + 0.5])
+      lower_belt_cutout();
+    translate([225, 130 - current_y_position, 24 + 0.5])
+      upper_belt_cutout();
 
     // inner rail mount
     for (i = [-1,1]) {
       translate([10,7.5 * i,-0.1])
       cylinder(h = 40, r = 1.6, $fn = resolution);
     }
+
+    // inner rail mount head space
+    for (i = [-1,1]) {
+      translate([10,7.5 * i,36.0 - 7.65])
+        cylinder(h = 7.7, r = 3.0, $fn = resolution);
+    }
+
     // outer rail mount
-    for (i = [-1]) {
+    for (i = [1]) {
       translate([-10,7.5 * i,-0.1])
         cylinder(h = 10, r = 1.6, $fn = resolution);
     }
 
     // space for outer rail mount screw
-    for (i = [-1]) {
+    for (i = [1]) {
       hull() {
       translate([-10,7.5 * i,4.0])
-        cylinder(h = 10, r = 3, $fn = resolution);
+        cylinder(h = 8, r = 3, $fn = resolution);
       translate([-15,7.5 * i,4.0])
-        cylinder(h = 50, r = 3, $fn = resolution);
+        cylinder(h = 10, r = 3, $fn = resolution);
       }
     }
   }
