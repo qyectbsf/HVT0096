@@ -22,18 +22,18 @@ module bed()
         # bed_rail_angle_marker();
         }
 
-  if ( show_bed == 1 )
-    {
-      translate([0,
-                 -35 + 3.5,
-                 -current_z_position + 35])
-        alu_plate();
+  // if ( show_bed == 1 )
+  //   {
+      // translate([0,
+      //            -35 + 3.5,
+      //            -current_z_position + 35])
+      //   alu_plate();
 
       translate([0,
                  -bed_frame_offset_y,
                  -current_z_position])
         bed_frame();
-    }
+  //   }
 
   if ( show_bed == 1 )
     {

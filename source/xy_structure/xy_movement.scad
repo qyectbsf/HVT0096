@@ -18,7 +18,7 @@ module y_movement()
   }
 
   translate([-225, -130, 13]) y_rail_mount_left();
-  translate([225, -130, 13]) rotate([0, 0, 180]) y_rail_mount_right();
+  translate([225, -130, 13])  y_rail_mount_right();
 
   if (show_y_rail_addatives == 1)
     {
@@ -30,10 +30,12 @@ module y_movement()
 
 module x_movement()
 {
-  translate([- 150,0,0]) carriage_qye();
-}
+  translate([-150,0,19.2])
+  rotate([180,0,0])
+  carriage(MGN12H_carriage);
 
-module y_rail_mount() {
+  // translate([- 150,0,0]) carriage();
+  //translate([-150,- 152.14 + 65, 26.2 + 13 - 52]) carriage_e3d();
 }
 
 module y_rail_mount_addatives()
@@ -42,17 +44,17 @@ module y_rail_mount_addatives()
   translate([0, -130, -1.25])
     union() {
     // left lower idler
-    translate([-228.00, -8.00, lower_belt_z]) pulley(GT2x20_toothed_idler);
-    translate([-228.00, -8.00, 13 -0.1]) cylinder(h = 50, d = 3.1, $fn = resolution);
+    translate([lower_belt_idler_x_coordinates[0], -7.50, lower_belt_z]) pulley(GT2x20_toothed_idler);
+    translate([lower_belt_idler_x_coordinates[0], -7.50, 13 -0.1]) cylinder(h = 50, d = 3.1, $fn = resolution);
     // left upper idler
-    translate([-231.40, +8.00, 13 -0.1]) cylinder(h = 50, d = 3.1, $fn = resolution);
-    translate([-231.40, +8.00, upper_belt_z]) pulley(GT2x20_plain_idler);
+    translate([lower_belt_idler_x_coordinates[0], +7.50, upper_belt_z]) pulley(GT2x20_plain_idler);
+    translate([lower_belt_idler_x_coordinates[0], +7.50, 13 -0.1]) cylinder(h = 50, d = 3.1, $fn = resolution);
     // right upper idler
-    translate([+228.00, -8.00, upper_belt_z]) pulley(GT2x20_toothed_idler);
-    translate([+228.00, -8.00, 13 -0.1]) cylinder(h = 50, d = 3.1, $fn = resolution);
+    translate([upper_belt_idler_x_coordinates[8], -7.50, upper_belt_z]) pulley(GT2x20_toothed_idler);
+    translate([upper_belt_idler_x_coordinates[8], -7.50, 13 -0.1]) cylinder(h = 50, d = 3.1, $fn = resolution);
     // right lower idler
-    translate([+231.40, +8.00, lower_belt_z]) pulley(GT2x20_plain_idler);
-    translate([+231.40, +8.00, 13 - 0.1]) cylinder(h = 50, d = 3.1, $fn = resolution);
+    translate([upper_belt_idler_x_coordinates[8], +7.50, lower_belt_z]) pulley(GT2x20_plain_idler);
+    translate([upper_belt_idler_x_coordinates[8], +7.50, 13 - 0.1]) cylinder(h = 50, d = 3.1, $fn = resolution);
   }
 
   for (i = [-1,1])
