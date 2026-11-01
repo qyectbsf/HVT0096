@@ -42,12 +42,12 @@ module primary_back_right()
       translate([-motor_rel_offset_x, motor_rel_offset_y, lower_belt_z - 12.5]) xy_motor_shaft_cutout();
 
       // 3 out of 4 screws for motor mount
-      translate([-motor_rel_offset_x, motor_rel_offset_y, lower_belt_z - 12.5])
+      translate([-motor_rel_offset_x, motor_rel_offset_y, lower_belt_z - 13.2])
         rotate([0,0,-90])
         xy_motor_screw_cutout();
 
       //space for idler
-      translate([-1 * (motor_rel_offset_x + 15.52), motor_rel_offset_y - 15.52, lower_belt_idler_z - 1.25])
+      translate([-1 * (motor_rel_offset_x + 15.52), motor_rel_offset_y - 15.52, lower_belt_idler_z - 0.75])
         idler_cutout(21);
 
       // space for 3mm stab
@@ -58,8 +58,8 @@ module primary_back_right()
       translate([-225,-220,lower_belt_z + 3]) lower_belt_cutout();
 
       // space for idler assembly
-      translate([-1 * ( motor_rel_offset_x +15.52 + 10), motor_rel_offset_y -44, lower_belt_z - 2.5])
-        cube([20, 25, 11.0]);
+      translate([-1 * ( motor_rel_offset_x +15.52 + 10), motor_rel_offset_y -44, lower_belt_z - 2.0])
+        cube([20, 25, 10.0]);
 
       // space for m6
       for (z = [-15,60.5]){
@@ -70,6 +70,13 @@ module primary_back_right()
       translate([19, - 86 + 30, -15])
         rotate([0, 90, 0])
         cylinder(h = 10, d = m6_screw, center = true, $fn = resolution);
+
+      // idler space
+      translate([upper_belt_idler_x_coordinates[7] -225,
+                 upper_belt_idler_y_coordinates[7] -220,
+                 upper_belt_idler_z - 0.75])
+        idler_cutout(21);
+
     }
 }
 
@@ -94,13 +101,17 @@ module secondary_back_right()
     translate([-225,-220,upper_belt_z + 3]) upper_belt_cutout();
 
     // idler space
-    translate([-1 * (motor_rel_offset_x + 43), motor_rel_offset_y, upper_belt_idler_z - 1.25])
+    translate([upper_belt_idler_x_coordinates[7] -225,
+               upper_belt_idler_y_coordinates[7] -220,
+               upper_belt_idler_z - 0.75])
       idler_cutout(21);
-    translate([-1 * (motor_rel_offset_x + 43 + 10), motor_rel_offset_y - 20, upper_belt_idler_z - 1.25])
-      cube([20, 25, 11.0]);
+    translate([-1*  (motor_rel_offset_x + 46.9), motor_rel_offset_y - 10.1, upper_belt_idler_z - 0.75])
+      cube([16, 5, 10.0]);
 
     // idler stab space
-    translate([-1 * (motor_rel_offset_x + 43), motor_rel_offset_y, upper_belt_idler_z - 1.25])
+    translate([upper_belt_idler_x_coordinates[7] -225,
+               upper_belt_idler_y_coordinates[7] -220,
+               upper_belt_idler_z - 1.25])
       cylinder(h =70.0, d = 3mm_stab, $fn = resolution, center = true);
 
     // m6 screw
@@ -136,8 +147,12 @@ module block_back_right_addatives()
   translate([-motor_rel_offset_x, motor_rel_offset_y, lower_belt_z + 10.5]) mr115zz_bearing();
 
   // idler
-  translate([-1 * (motor_rel_offset_x + 43), motor_rel_offset_y, upper_belt_idler_z ]) pulley(GT2x20_toothed_idler);
-  translate([-1 * (motor_rel_offset_x + 43), motor_rel_offset_y, upper_belt_idler_z - 1.25])
+  translate([upper_belt_idler_x_coordinates[7] -225,
+             upper_belt_idler_y_coordinates[7] -220,
+             upper_belt_idler_z ]) pulley(GT2x20_toothed_idler);
+  translate([upper_belt_idler_x_coordinates[7] -225,
+             upper_belt_idler_y_coordinates[7] -220,
+             upper_belt_idler_z - 1.25])
     cylinder(h =70.0, d = 3mm_stab, $fn = resolution, center = true);
 
   if (show_screws == 1)

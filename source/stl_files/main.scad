@@ -179,7 +179,8 @@ module left_lower_mod()
 }
 
 module idler_cutout_wip() {
-  difference() {
+  difference()
+    {
     cylinder(r = 9.25, h = 10.0, $fn = resolution);
     for (i = [0,180]) {
       translate([0,0,5])

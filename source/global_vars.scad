@@ -1,20 +1,20 @@
-resolution = 10.0;
+resolution = 200.0;
 
 show_belts = 1;
 show_frame = 1;
 show_screws = 0;
 
-show_z_struct = 0;
-show_z_left = 0;
-show_z_right = 0;
-show_z_back = 0;
+show_z_struct = 1;
+show_z_left = 1;
+show_z_right = 1;
+show_z_back = 1;
 
 
 
 show_xy_struct = 1;
 
-show_xy_back_left = 0;
-show_xy_back_left_addatives = 0;
+show_xy_back_left = 1;
+show_xy_back_left_addatives = 1;
 
 show_xy_back_right = 1;
 show_xy_back_right_addatives = 1;
@@ -22,8 +22,8 @@ show_xy_back_right_addatives = 1;
 show_xy_front_left = 1;
 show_xy_front_left_addatives = 1;
 
-show_xy_front_right = 0;
-show_xy_front_right_addatives = 0;
+show_xy_front_right = 1;
+show_xy_front_right_addatives = 1;
 
 show_xy_left = 0;
 show_xy_left_addatives = 0;
@@ -31,8 +31,8 @@ show_xy_left_addatives = 0;
 show_xy_right = 0;
 show_xy_right_addatives = 0;
 
-show_xy_back = 0;
-show_xy_back_addatives = 0;
+show_xy_back = 1;
+show_xy_back_addatives = 1;
 
 show_x_rail = 1;
 show_x_rail_addatives = 1;
@@ -40,10 +40,10 @@ show_x_rail_addatives = 1;
 
 show_y_struct = 1;
 
-show_y_rail = 1;
+show_y_rail = 0;
 show_y_rail_addatives = 0;
 
-show_bed = 0;
+show_bed = 1;
 show_bed_left = 1;
 show_bed_right = 1;
 show_bed_back = 1;
@@ -59,7 +59,7 @@ belt_thickness = 1.5;
 belt_height = 6.0;
 belt_distance = 12;
 
-belt_tention_strength = 0; // [0, 14.5]
+belt_tention_strength = 0.0; // [0.0, 14.5]
 
 frame_back_left_x = -225;
 frame_back_left_y = 370;
@@ -167,7 +167,7 @@ right_bed_rail_angle = -left_bed_rail_angle;
 back_bed_rail_angle = 0.0;
 
 idler_height = 9.0;
-idler_cutout_height = idler_height + 2;
+idler_cutout_height = idler_height + 1;
 
 mcl_clamp_height = 9.0;
 
@@ -271,12 +271,12 @@ module idler_cutout(width)
   difference()
     {
       cylinder(h = idler_cutout_height, d = width, $fn = resolution);
-      for (r =  [0, 180] )
+      for (i =  [0, 180] )
         {
           translate([0, 0, idler_cutout_height / 2])
-            rotate([r, 0, 0])
-            translate([0, 0, idler_cutout_height / 2 - 1.25])
-            cylinder(h = 1.25, d1 = 4.8, d2 = 8, $fn = resolution);
+            rotate([0, i, 0])
+            translate([0, 0, idler_cutout_height / 2 - 0.75])
+            cylinder(h = 0.75, d1 = 5.0, d2 = 7.0, $fn = resolution);
         }
     }
 }
@@ -328,8 +328,8 @@ module xy_motor_screw_cutout()
         {
           union()
             {
-              translate([x * 15.52, y * 15.52, -0.1]) cylinder(h = 5.5, d = 2.9, $fn = resolution);
-              translate([x * 15.52, y * 15.52, 5.2]) cylinder(h = 100, d = 5, $fn = resolution);
+              translate([x * 15.52, y * 15.52, -0.1]) cylinder(h = 6.2, d = 2.9, $fn = resolution);
+              translate([x * 15.52, y * 15.52, 6.0]) cylinder(h = 100, d = 6, $fn = resolution);
             }
         }
     }

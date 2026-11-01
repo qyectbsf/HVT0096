@@ -259,7 +259,7 @@ module biqu_h2o_extruder()
   }
 }
 
-module carriage_qye()
+module tool_head()
 {
   translate([1.15,-42.4,-57]) union()
   {

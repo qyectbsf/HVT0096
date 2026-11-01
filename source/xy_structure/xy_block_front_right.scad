@@ -12,7 +12,7 @@ module block_front_right()
         {
           translate([15, -15.0, -30.0]) cube([6.5, 65.0, 100.0]);
           translate([-15, 15, 10.0]) cube([30.0, 6.0, 60.0]);
-          translate([-15, 15, 0.0]) cube([30.0, 3.0, 10.1]);
+          translate([+9, 15, 0.0]) cube([6.0, 3.0, 10.1]);
 
           translate([0.0, 22.50, 63.0]) hull()
             {
@@ -24,7 +24,7 @@ module block_front_right()
         }
 
       // space for idler
-      translate([18.5, 30, lower_belt_idler_z - 1.25]) idler_cutout(21);
+      translate([18.5, 30, lower_belt_idler_z - 0.75]) idler_cutout(20);
 
       // space for 3mm stab
       translate([18.5,30,40])

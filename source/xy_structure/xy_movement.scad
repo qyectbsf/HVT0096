@@ -2,7 +2,7 @@ include <nopSCADlib/lib.scad>
 
 include <../global_vars.scad>
 include <../stl_files/main.scad>
-include <../carriage/main.scad>
+include <../tool_head/main.scad>
 include <y_block_left.scad>
 include <y_block_right.scad>
 
@@ -11,17 +11,18 @@ module y_movement()
   // 20x20 alu profile
   translate([0, -130, 29.2]) rotate([0,90,0]) extrusion(E2020, 420, cornerHole = true);
 
-  for ( i = [1,-1] ) {
-    translate([(30/2 + 420/2)*i, -130 , 0])
-      rotate([0,0,90])
-      carriage(MGN12C_carriage);
-  }
+
 
   translate([-225, -130, 13]) y_rail_mount_left();
-  translate([225, -130, 13])  y_rail_mount_right();
+  // translate([225, -130, 13])  y_rail_mount_right();
 
   if (show_y_rail_addatives == 1)
     {
+      for ( i = [1,-1] ) {
+        translate([(30/2 + 420/2)*i, -130 , 0])
+          rotate([0,0,90])
+          carriage(MGN12C_carriage);
+      }
       y_rail_mount_addatives();
     }
 
@@ -30,12 +31,12 @@ module y_movement()
 
 module x_movement()
 {
-  translate([-150,0,19.2])
-  rotate([180,0,0])
-  carriage(MGN12H_carriage);
+  //translate([-150,0,19.2])
+  //rotate([180,0,0])
+  //carriage(MGN12H_carriage);
 
   // translate([- 150,0,0]) carriage();
-  //translate([-150,- 152.14 + 65, 26.2 + 13 - 52]) carriage_e3d();
+  translate([-150,0, 0]) tool_head();
 }
 
 module y_rail_mount_addatives()

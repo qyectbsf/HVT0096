@@ -56,10 +56,10 @@ module y_rail_mount_right ()
     // idler space
     translate([lower_belt_idler_x_coordinates[8] - 225,
                lower_belt_idler_y_coordinates[8] + 130 - current_y_position,
-               lower_belt_z - 15]) idler_cutout_wip();
+               lower_belt_z - 15]) idler_cutout(20);
     translate([upper_belt_idler_x_coordinates[8] - 225,
                upper_belt_idler_y_coordinates[8] + 130 - current_y_position,
-               upper_belt_z - 15]) idler_cutout_wip();
+               upper_belt_z - 15]) idler_cutout(20);
 
     // idler 3mm stab
     translate([lower_belt_idler_x_coordinates[8] - 225,

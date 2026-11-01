@@ -97,9 +97,9 @@ module xy_structure()
 
       if ( show_xy_back == 1 )
         {
-          translate([0,0,0]) union()
+          translate([0,220,0]) union()
             {
-              // block_back();
+              block_back();
               if ( show_xy_back_addatives == 1 )
                 {
                   block_back_addatives();
