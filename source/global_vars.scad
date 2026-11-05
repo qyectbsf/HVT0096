@@ -1,15 +1,15 @@
-resolution = 200.0;
+resolution = 10.0;
 
 show_belts = 1;
 show_frame = 1;
 show_screws = 0;
 
 show_z_struct = 1;
-show_z_left = 1;
-show_z_right = 1;
-show_z_back = 1;
-
-
+show_z_left = 0;
+show_z_right = 0;
+show_z_back = 0;
+show_z_rail = 1;
+show_z_addatives = 1;
 
 show_xy_struct = 1;
 
@@ -43,7 +43,7 @@ show_y_struct = 1;
 show_y_rail = 0;
 show_y_rail_addatives = 0;
 
-show_bed = 1;
+show_bed = 0;
 show_bed_left = 1;
 show_bed_right = 1;
 show_bed_back = 1;
@@ -53,7 +53,7 @@ show_addatives = 1;
 
 current_x_position = 0.0;
 current_y_position = 0.0; // [-25.8, 293.0]
-current_z_position = -13.0 + 0.0 + 100;
+current_z_position = 0.0 + 28.73;
 
 belt_thickness = 1.5;
 belt_height = 6.0;
@@ -498,6 +498,52 @@ module subract_void(x, y, z, cube_x, cube_y, cube_z)
     }
 }
 
+module spindel(height)
+{
+  cylinder(h = 15.1, d = 8.0, $fn = resolution);
+  translate([0,0,15])
+    cylinder(h = 39.1, d = 10, $fn = resolution);
+
+  translate([0,0,39])
+    cylinder(h = height - 39 - 10, d = 12, $fn = resolution);
+
+  translate([0,0,height - 10.1])
+    cylinder(h = 10.1, d = 8.0, $fn = resolution );
+}
+
+module sfu1204_nut() {
+    flange_od = 42;
+    flange_th = 8;
+    barrel_od = 22;
+    nut_len = 35;
+    flats_dist = 30; // Abstand zwischen den zwei abgeflachten Seiten des Flansches
+    hole_pcd = 32;   // Lochkreisdurchmesser (Pitch Circle Diameter)
+    hole_d = 4.8;    // M4 Durchgangsloch
+
+    difference() {
+        union() {
+            // Flansch mit Abflachungen
+            intersection() {
+              cylinder(d=flange_od, h=flange_th, $fn=72);
+                translate([0, 0, flange_th/2])
+                    cube([flange_od+2, flats_dist, flange_th+2], center=true);
+            }
+            // Zylindrischer Körper der Mutter
+            cylinder(d=barrel_od, h=nut_len, $fn=72);
+        }
+
+        // Innere Bohrung (Freigabe für die Spindel)
+        translate([0, 0, -1])
+            cylinder(d=12.5, h=nut_len+2, $fn=36);
+
+        // 6x Befestigungslöcher (M4)
+        for (i = [-45,0,45,-180 - 45,-180,-180 + 45]) {
+            rotate([0, 0, i])
+            translate([hole_pcd/2, 0, -1])
+            cylinder(d=hole_d, h=flange_th+2, $fn=16);
+        }
+    }
+}
 
 
 //rosengelenkstangenkugellager_mount();

@@ -110,10 +110,10 @@ module y_schiene(x)
 }
 
 
-module z_rail()
-{
-  import("stl_files/MGNR12R456HM.stl", convexity = 10);
-}
+// module z_rail()
+// {
+//   import("stl_files/MGNR12R456HM.stl", convexity = 10);
+// }
 
 module z_ball_screw_spindel()
 {
